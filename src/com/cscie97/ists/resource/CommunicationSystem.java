@@ -4,7 +4,7 @@ public class CommunicationSystem {
 
     String id;
     String status;
-    String upTime;
+    Integer upTime; // Time in minutes
     
     public CommunicationSystem(String id)
     {

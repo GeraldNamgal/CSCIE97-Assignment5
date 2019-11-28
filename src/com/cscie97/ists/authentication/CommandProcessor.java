@@ -23,13 +23,13 @@ public class CommandProcessor
     
     /* Constructor */
     
-    public CommandProcessor()
+    public CommandProcessor(StoreAuthenticationService authenticator, com.cscie97.ledger.CommandProcessor ledgerCp)
     {
         // Create Authenticator      
-        authenticator = new Authenticator();
+        this.authenticator = authenticator;
         
         // Create ledger cp
-        ledgerCp = new com.cscie97.ledger.CommandProcessor(this);
+        this.ledgerCp = ledgerCp;
         
         // Login CommandProcessor with hardcoded User credentials so can operate Authenticator methods
         hardcodedUserAuthToken = authenticator.login(Authenticator.getHardcodedUserUsername(), Authenticator.getHardcodedUserPassword());

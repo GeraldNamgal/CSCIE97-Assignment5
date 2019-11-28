@@ -4,7 +4,7 @@ public class ComputerSystem {
 
     String id;
     String status;
-    String upTime;
+    Integer upTime; // Time in minutes
     
     public ComputerSystem(String id)
     {

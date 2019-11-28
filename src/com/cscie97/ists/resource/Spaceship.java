@@ -11,7 +11,20 @@ public class Spaceship {
         Cargo cargo;
         Passenger passenger;
         Integer fuelCapacity;
+        Integer fuelLevel;
         String description;
+        Integer currentSpeed;
+        
+        
+        public String[] event(String perceivedEvent)
+        {
+            // Delimit event string on whitespace and add each value to an array
+            String[] eventStrArr = perceivedEvent.split("\\s+");
+            
+            return eventStrArr;
+        }
+        
+        
         
         // Cargo
         public Spaceship(String id, String model, String name, Integer maxSpeed, String fuelType, String cargoType
@@ -58,6 +71,8 @@ public class Spaceship {
             this.description = description;
         }
         
+        
+        
         public class Cargo
         {
             String cargoType;
@@ -78,5 +93,17 @@ public class Spaceship {
                 this.capacity = capacity;
                 this.classType = classType;
             }
+        }
+        
+        
+        
+        public void addFuel(Integer amount)
+        {
+            fuelLevel = fuelLevel + amount;
+        }
+        
+        public void consumeFuel(Integer amount)
+        {
+            fuelLevel = fuelLevel - amount;
         }
 }
