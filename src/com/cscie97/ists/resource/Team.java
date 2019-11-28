@@ -7,9 +7,9 @@ public class Team extends Entity
     String type;
     LinkedHashMap<String, Entity> entities;
     
-    public Team(String id, String name, String type)
+    public Team(String id, String name, String description, String type)
     {
-        super(id, name);
+        super(id, name, description);
 
         this.type = type;
         entities = new LinkedHashMap<String, Entity>();

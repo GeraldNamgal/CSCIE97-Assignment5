@@ -3,6 +3,11 @@ package com.cscie97.ists.resource;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
+import com.cscie97.ists.authentication.AuthTokenTuple;
+// TODO: Remove? -- import com.cscie97.ists.resource.Inventory;
+import com.cscie97.ists.authentication.GetPermissionsVisitor;
+import com.cscie97.ists.authentication.StoreAuthenticationService;
+
 public class ResourceImpl implements ResourceManagementService, Subject
 {
     LinkedHashMap<String, Entity> entities;
@@ -13,14 +18,18 @@ public class ResourceImpl implements ResourceManagementService, Subject
     LinkedHashMap<String, Fuel> fuels;
     com.cscie97.ledger.CommandProcessor ledgerCp;
     LinkedHashMap<String, Integer> prices;
+    // TODO: Remove? -- LinkedHashMap<String, Inventory> inventories;
+    StoreAuthenticationService authenticator;
     
     ArrayList<Observer> observers;
     
     
     
-    public ResourceImpl(com.cscie97.ledger.CommandProcessor ledgerCp)
+    public ResourceImpl(com.cscie97.ledger.CommandProcessor ledgerCp, com.cscie97.ists.authentication.StoreAuthenticationService authenticator)
     {
         this.ledgerCp = ledgerCp;
+        this.authenticator = authenticator;
+        
         observers = new ArrayList<Observer>();
     }
     
@@ -50,8 +59,13 @@ public class ResourceImpl implements ResourceManagementService, Subject
     
     
     @Override
-    public void createEvent(String spaceshipId, String simulatedEvent)
+    public void createEvent(String spaceshipId, String simulatedEvent, AuthTokenTuple authTokenTuple)
     {        
+        // Check that given AuthToken has permission to access this method
+        GetPermissionsVisitor getPermissionsVisitor = authenticator.getUserPermissions(authTokenTuple.getAuthToken());
+        if ((getPermissionsVisitor == null) || !getPermissionsVisitor.hasPermission(authTokenTuple.getPermissionTuple().setPermissionId("use Modeler API")))        
+            return;
+        
         Spaceship sourceDevice = spaceships.get(spaceshipId);
         
         // Send simulated event to device's event method       
@@ -62,32 +76,32 @@ public class ResourceImpl implements ResourceManagementService, Subject
     }
     
     @Override
-    public Person definePerson(String id, String name, String role) {
+    public Person definePerson(String id, String name, String description, String role, AuthTokenTuple authTokenTuple) {
         
-        Person person = new Person(id, name, role);
+        Person person = new Person(id, name, description, role);
         entities.put(id, person);
         
         return person;
     }
     
     @Override
-    public Team defineTeam(String id, String name, String type) {
+    public Team defineTeam(String id, String name, String description, String type, AuthTokenTuple authTokenTuple) {
         
-        Team team = new Team(id, name, type);
+        Team team = new Team(id, name, description, type);
         entities.put(id, team);
         
         return team;
     } 
     
     @Override
-    public void addEntityToTeam(String entityId, String teamId) {
+    public void addEntityToTeam(String entityId, String teamId, AuthTokenTuple authTokenTuple) {
         
         Team team = (Team) entities.get(teamId);
         team.entities.put(entityId, entities.get(entityId));
     }
 
     @Override
-    public Launchpad defineLaunchPad(String id, String name, String location) {
+    public Launchpad defineLaunchPad(String id, String name, String location, AuthTokenTuple authTokenTuple) {
         
         Launchpad launchpad = new Launchpad(id, name, location);
         launchpads.put(id, launchpad);
@@ -98,7 +112,7 @@ public class ResourceImpl implements ResourceManagementService, Subject
     // Cargo
     @Override
     public Spaceship defineSpaceship(String id, String model, String name, Integer maxSpeed, String fuelType,
-            String cargoType, Integer fuelCapacity, String description) {
+            String cargoType, Integer fuelCapacity, String description, AuthTokenTuple authTokenTuple) {
         
         Spaceship spaceship = new Spaceship(id, model, name, maxSpeed, fuelType, cargoType, fuelCapacity, description);
         spaceships.put(id, spaceship);
@@ -109,7 +123,7 @@ public class ResourceImpl implements ResourceManagementService, Subject
     // Passenger
     @Override
     public Spaceship defineSpaceship(String id, String model, String name, Integer maxSpeed, String fuelType,
-            Integer capacity, String classType, Integer fuelCapacity, String description) {
+            Integer capacity, String classType, Integer fuelCapacity, String description, AuthTokenTuple authTokenTuple) {
         
         Spaceship spaceship = new Spaceship(id, model, name, maxSpeed, fuelType, capacity, classType, fuelCapacity, description);
         spaceships.put(id, spaceship);
@@ -120,7 +134,7 @@ public class ResourceImpl implements ResourceManagementService, Subject
     // Rescue
     @Override
     public Spaceship defineSpaceship(String id, String model, String name, Integer maxSpeed, String fuelType,
-            Integer fuelCapacity, String description) {
+            Integer fuelCapacity, String description, AuthTokenTuple authTokenTuple) {
         
         Spaceship spaceship = new Spaceship(id, model, name, maxSpeed, fuelType, fuelCapacity, description);
         spaceships.put(id, spaceship);
@@ -128,8 +142,22 @@ public class ResourceImpl implements ResourceManagementService, Subject
         return spaceship;
     }
 
+    /* TODO: Remove? -- @Override
+    public Inventory defineInventory(String id, String launchpadId, String spaceshipId) {
+
+        Inventory inventory = new Inventory(id, launchpadId, spaceshipId);        
+        
+        if (inventory != null)
+        {
+            // Add inventory id and its associated store to inventories list
+            inventories.put(id, inventory);            
+        }
+        
+        return inventory;
+    }*/ 
+    
     @Override
-    public void defineCommunicationSystem(String id) {
+    public void defineCommunicationSystem(String id, AuthTokenTuple authTokenTuple) {
         
         CommunicationSystem communicationSystem = new CommunicationSystem(id);
         
@@ -137,13 +165,13 @@ public class ResourceImpl implements ResourceManagementService, Subject
     }
 
     @Override
-    public void defineComputerSystem(String id) {
+    public void defineComputerSystem(String id, AuthTokenTuple authTokenTuple) {
         
         this.computerSystem = new ComputerSystem(id);       
     }    
     
     @Override
-    public void giveSpaceshipFuel(String spaceshipId, Integer amount) {
+    public void giveSpaceshipFuel(String spaceshipId, Integer amount, AuthTokenTuple authTokenTuple) {
         
         // TODO: Make sure amount doesn't go over capacity
         
@@ -153,7 +181,7 @@ public class ResourceImpl implements ResourceManagementService, Subject
     }
     
     @Override
-    public Fuel defineFuel(String typeId, Integer amount) {
+    public Fuel defineFuel(String typeId, Integer amount, AuthTokenTuple authTokenTuple) {
         
         Fuel fuel = new Fuel(typeId, amount);
         fuels.put(typeId, fuel);
@@ -162,7 +190,7 @@ public class ResourceImpl implements ResourceManagementService, Subject
     }
 
     @Override
-    public Fuel defineFuel(String typeId) {
+    public Fuel defineFuel(String typeId, AuthTokenTuple authTokenTuple) {
         
         Fuel fuel = new Fuel(typeId);
         fuels.put(typeId, fuel);
@@ -172,24 +200,24 @@ public class ResourceImpl implements ResourceManagementService, Subject
     
     // To add and decrease fuel supply, ...?
     @Override
-    public LinkedHashMap<String, Fuel> getFuels() {
+    public LinkedHashMap<String, Fuel> getFuels(AuthTokenTuple authTokenTuple) {
 
         return fuels;
     }
 
     @Override
-    public LinkedHashMap<String, Spaceship> getSpaceships() {
+    public LinkedHashMap<String, Spaceship> getSpaceships(AuthTokenTuple authTokenTuple) {
         return spaceships;
     }
     
     @Override
-    public void addItemPrice(String itemName, Integer price) {
+    public void addItemPrice(String itemName, Integer price, AuthTokenTuple authTokenTuple) {
         
         prices.put(itemName, price);
     }
     
     @Override
-    public void buyResource(String resourceName, Integer amount)
+    public void buyResource(String resourceName, Integer amount, AuthTokenTuple authTokenTuple)
     {
         
         //String txnId = 
@@ -197,10 +225,10 @@ public class ResourceImpl implements ResourceManagementService, Subject
     }
     
     @Override
-    public Integer getBudget() {
+    public Integer getBudget(AuthTokenTuple authTokenTuple) {
         
         //System.out.println(Integer.parseInt(ledgerCp.getAccountBalance("ists")));
     
         return Integer.parseInt(ledgerCp.getAccountBalance("ists"));
-    }    
+    } 
 }

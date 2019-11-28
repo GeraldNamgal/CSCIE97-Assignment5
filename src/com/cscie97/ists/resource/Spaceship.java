@@ -11,7 +11,7 @@ public class Spaceship {
         Cargo cargo;
         Passenger passenger;
         Integer fuelCapacity;
-        Integer fuelLevel;
+        Integer fuelLevel = 0;
         String description;
         Integer currentSpeed;
         
