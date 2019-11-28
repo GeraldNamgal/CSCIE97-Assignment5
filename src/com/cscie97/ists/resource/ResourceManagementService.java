@@ -10,6 +10,7 @@ public interface ResourceManagementService
     Person definePerson(String id, String name, String description, String role, AuthTokenTuple authTokenTuple);
     Team defineTeam(String id, String name, String description, String type, AuthTokenTuple authTokenTuple);
     void addEntityToTeam(String entityId, String teamId, AuthTokenTuple authTokenTuple);
+    void makeEntityOfficial(String entityId);
     Launchpad defineLaunchPad(String id, String name, String location, AuthTokenTuple authTokenTuple);
     Spaceship defineSpaceship(String id, String model, String name, Integer maxSpeed, String fuelType, String cargoType
             , Integer fuelCapacity, String description, AuthTokenTuple authTokenTuple);

@@ -11,6 +11,7 @@ import com.cscie97.ists.authentication.StoreAuthenticationService;
 public class ResourceImpl implements ResourceManagementService, Subject
 {
     LinkedHashMap<String, Entity> entities;
+    LinkedHashMap<String, Entity> officialEntities;
     LinkedHashMap<String, Launchpad> launchpads;
     LinkedHashMap<String, Spaceship> spaceships;
     CommunicationSystem communicationSystem;
@@ -98,6 +99,12 @@ public class ResourceImpl implements ResourceManagementService, Subject
         
         Team team = (Team) entities.get(teamId);
         team.entities.put(entityId, entities.get(entityId));
+    }
+    
+    @Override
+    public void makeEntityOfficial(String entityId)
+    {
+        officialEntities.put(entityId, entities.get(entityId));
     }
 
     @Override
