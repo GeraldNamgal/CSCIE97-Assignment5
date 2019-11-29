@@ -62,7 +62,7 @@ public class ResourceImpl implements ResourceManagementService, Subject
     @Override
     public void createEvent(String spaceshipId, String simulatedEvent, AuthTokenTuple authTokenTuple)
     {        
-        // Check that given AuthToken has permission to access this method
+        /*// Check that given AuthToken has permission to access this method
         GetPermissionsVisitor getPermissionsVisitor = authenticator.getUserPermissions(authTokenTuple.getAuthToken());
         if ((getPermissionsVisitor == null) || !getPermissionsVisitor.hasPermission(authTokenTuple.getPermissionTuple().setPermissionId("use Modeler API")))        
             return;
@@ -70,7 +70,11 @@ public class ResourceImpl implements ResourceManagementService, Subject
         Spaceship sourceDevice = spaceships.get(spaceshipId);
         
         // Send simulated event to device's event method       
-        String[] eventToSend = sourceDevice.event(simulatedEvent);
+        String[] eventToSend = sourceDevice.event(simulatedEvent);*/
+        
+        Spaceship sourceDevice = null;
+        String[] eventToSend = new String[1];
+        eventToSend[0] = simulatedEvent;
         
         // Notify observers of the event sent back from device
         notifyObservers(sourceDevice, eventToSend);   
@@ -218,7 +222,7 @@ public class ResourceImpl implements ResourceManagementService, Subject
     }
     
     @Override
-    public void addItemPrice(String itemName, Integer price, AuthTokenTuple authTokenTuple) {
+    public void addResourcePrice(String itemName, Integer price, AuthTokenTuple authTokenTuple) {
         
         prices.put(itemName, price);
     }
@@ -237,5 +241,45 @@ public class ResourceImpl implements ResourceManagementService, Subject
         //System.out.println(Integer.parseInt(ledgerCp.getAccountBalance("ists")));
     
         return Integer.parseInt(ledgerCp.getAccountBalance("ists"));
+    }
+
+    @Override
+    public LinkedHashMap<String, Entity> getEntities(AuthTokenTuple authTokenTuple) {
+        return entities;
+    }
+
+
+
+    @Override
+    public LinkedHashMap<String, Entity> getOfficialEntities(AuthTokenTuple authTokenTuple) {
+        return officialEntities;
+    }
+
+
+
+    @Override
+    public LinkedHashMap<String, Launchpad> getLaunchpads(AuthTokenTuple authTokenTuple) {
+        return launchpads;
+    }
+
+
+
+    @Override
+    public CommunicationSystem getCommunicationSystem(AuthTokenTuple authTokenTuple) {
+        return communicationSystem;
+    }
+
+
+
+    @Override
+    public ComputerSystem getComputerSystem(AuthTokenTuple authTokenTuple) {
+        return computerSystem;
+    }
+
+
+
+    @Override
+    public LinkedHashMap<String, Integer> getResourcePrices(AuthTokenTuple authTokenTuple) {
+        return prices;
     } 
 }

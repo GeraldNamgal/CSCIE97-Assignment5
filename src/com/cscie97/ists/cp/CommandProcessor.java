@@ -4,8 +4,11 @@ import com.cscie97.ists.authentication.AuthToken;
 import com.cscie97.ists.authentication.AuthTokenTuple;
 import com.cscie97.ists.authentication.Authenticator;
 import com.cscie97.ists.authentication.StoreAuthenticationService;
+import com.cscie97.ists.manage.FlightManagementService;
+import com.cscie97.ists.manage.Manager;
 import com.cscie97.ists.resource.ResourceImpl;
 import com.cscie97.ists.resource.ResourceManagementService;
+import com.cscie97.ists.resource.Subject;
 
 public class CommandProcessor
 {
@@ -13,6 +16,7 @@ public class CommandProcessor
     com.cscie97.ledger.CommandProcessor ledgerCp;
     ResourceManagementService resourceImpl;
     AuthToken hardcodedUserAuthToken;
+    FlightManagementService manager;
     
     public CommandProcessor()
     {        
@@ -23,6 +27,7 @@ public class CommandProcessor
         hardcodedUserAuthToken = authenticator.login(Authenticator.getHardcodedUserUsername(), Authenticator.getHardcodedUserPassword());
         
         resourceImpl = new ResourceImpl(ledgerCp, authenticator);
+        manager = new Manager((Subject) resourceImpl, authenticator);
     }
     
     /* *
@@ -56,6 +61,9 @@ public class CommandProcessor
         parseAndProcess("process-transaction 8 amount 2000 fee 10 payload \"fund account\" payer master receiver art");
         
         resourceImpl.getBudget(new AuthTokenTuple(hardcodedUserAuthToken));
+        
+        String spaceshipId = null;
+        resourceImpl.createEvent(spaceshipId, "Testing", new AuthTokenTuple(hardcodedUserAuthToken));
     } 
     
     public void parseAndProcess(String input)

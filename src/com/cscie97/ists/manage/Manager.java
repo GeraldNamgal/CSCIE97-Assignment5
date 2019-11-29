@@ -15,13 +15,14 @@ import java.util.Map.Entry;
 import com.cscie97.ists.authentication.AuthToken;
 
 
-public class Manager implements Observer {
+public class Manager implements Observer, FlightManagementService {
 
     /* Constructor */ 
     
     ResourceManagementService resourceImpl;
     StoreAuthenticationService authenticator;
     AuthToken myAuthToken;
+    LinkedHashMap<String, Flight> flights;
 
     public Manager(Subject resourceImpl, StoreAuthenticationService authenticator)
     {       
@@ -34,6 +35,30 @@ public class Manager implements Observer {
         // TODO: Can skip for design doc -- Login Manager
         //myAuthToken = authenticator.login("controller-pwd", "password");
     }
+    
+    @Override
+    public Flight defineFlight(String id, String number, String time, String location, String destination, String duration, Integer numStops
+            , Integer capacity, String crewId, Integer ticketPrice, Integer passengerCount)
+    {
+        // Find available spaceships
+        resourceImpl.getSpaceships(null);
+        
+        // If no available spaceships, create one
+        Spaceship spaceship = new Spaceship(null, null, null, null, null, null, null);
+        
+        // Check flights list for availabilities for booking
+        
+        // Create new flight
+        Flight flight = new Flight(id, number, spaceship, time, location, destination, duration, numStops
+                , capacity, crewId, ticketPrice, passengerCount);
+        
+        // Add flight to flights list
+        flights.put(id, flight);
+        
+        return flight;
+    }
+    
+    
     
     @Override
     public void update(UpdateEvent event)
@@ -49,28 +74,28 @@ public class Manager implements Observer {
         String command = "";
         for (String string : eventStrArr)
         {
-            command += string;
+            command += string + " ";
         }
+        
+        command = command.trim();
        
-        if (command.equals("Here."))
+        if (command.equals("Testing"))
         {    
-            System.out.println("");
+            System.out.println("In handleEvent!");
             
-            /*// Create new Emergency               
-            Command emergency = new Emergency(event.getSourceDevice(), eventStrArr[1], eventStrArr[2]);
+            // Create new Emergency               
+            Command emergency = new Emergency(event.getSourceDevice());
             
-            System.out.println("\nEMERGENCY EVENT received. Emergency Command created and executing...");
+            System.out.println("EMERGENCY EVENT received. Emergency Command created and executing...");
             
             // Run the Command's execute method
-            emergency.execute();*/
+            emergency.execute();
         }
     }
     
     public class Emergency extends Command
     {      
-        /* Variables */
-        
-        
+        /* Variables */        
         
         public Emergency(Spaceship sourceDevice)
         {
@@ -79,8 +104,7 @@ public class Manager implements Observer {
 
         public void execute()
         {
-            
-        }
-            
+            System.out.println("In Emergency's execute()!");
+        }            
     }
 }

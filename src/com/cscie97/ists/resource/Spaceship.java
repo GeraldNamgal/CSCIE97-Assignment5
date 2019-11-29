@@ -8,12 +8,16 @@ public class Spaceship {
         Integer maxSpeed;
         String fuelType;
         String type;
-        Cargo cargo;
-        Passenger passenger;
+            Cargo cargo;
+            Passenger passenger;
         Integer fuelCapacity;
         Integer fuelLevel = 0;
         String description;
-        Integer currentSpeed;
+        Integer currentSpeed = 0;
+        String trajectory;
+        String coordinates;
+        String status;
+        
         
         
         public String[] event(String perceivedEvent)
@@ -38,6 +42,7 @@ public class Spaceship {
             this.type = "cargo";
             this.fuelCapacity = fuelCapacity;
             this.description = description;
+            this.status = "available";
            
             cargo = new Cargo(cargoType);            
         }
@@ -54,6 +59,7 @@ public class Spaceship {
             this.type = "passenger";
             this.fuelCapacity = fuelCapacity;
             this.description = description;
+            this.status = "available";
             
             passenger = new Passenger(capacity, classType);
         }
@@ -69,6 +75,7 @@ public class Spaceship {
             this.type = "rescue";
             this.fuelCapacity = fuelCapacity;
             this.description = description;
+            this.status = "available";
         }
         
         

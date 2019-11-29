@@ -21,13 +21,19 @@ public interface ResourceManagementService
     // TODO: Remove? -- Inventory defineInventory(String id, String launchpadId, String spaceshipId);
     void defineCommunicationSystem(String id, AuthTokenTuple authTokenTuple);
     void defineComputerSystem(String id, AuthTokenTuple authTokenTuple);
-    void giveSpaceshipFuel(String spaceshipId, Integer amount, AuthTokenTuple authTokenTuple);
-    Fuel defineFuel(String typeId, Integer amount, AuthTokenTuple authTokenTuple);
-    Fuel defineFuel(String typeId, AuthTokenTuple authTokenTuple);    
-    LinkedHashMap<String, Fuel> getFuels(AuthTokenTuple authTokenTuple); // To refill and decrease supply
-    LinkedHashMap<String, Spaceship> getSpaceships(AuthTokenTuple authTokenTuple);    
-    void addItemPrice(String itemName, Integer price, AuthTokenTuple authTokenTuple);    
+    void giveSpaceshipFuel(String spaceshipId, Integer amount, AuthTokenTuple authTokenTuple);        
+    void addResourcePrice(String resourceName, Integer price, AuthTokenTuple authTokenTuple);    
     void buyResource(String resourceName, Integer amount, AuthTokenTuple authTokenTuple);
     Integer getBudget(AuthTokenTuple authTokenTuple);
     void createEvent(String spaceshipId, String simulatedEvent, AuthTokenTuple authTokenTuple);
+    Fuel defineFuel(String typeId, Integer amount, AuthTokenTuple authTokenTuple);
+    Fuel defineFuel(String typeId, AuthTokenTuple authTokenTuple);
+    LinkedHashMap<String, Fuel> getFuels(AuthTokenTuple authTokenTuple); // To refill and decrease supply
+    LinkedHashMap<String, Spaceship> getSpaceships(AuthTokenTuple authTokenTuple);    
+    LinkedHashMap<String, Entity> getEntities(AuthTokenTuple authTokenTuple);
+    LinkedHashMap<String, Entity> getOfficialEntities(AuthTokenTuple authTokenTuple);
+    LinkedHashMap<String, Launchpad> getLaunchpads(AuthTokenTuple authTokenTuple);
+    CommunicationSystem getCommunicationSystem(AuthTokenTuple authTokenTuple);
+    ComputerSystem getComputerSystem(AuthTokenTuple authTokenTuple);
+    LinkedHashMap<String, Integer> getResourcePrices(AuthTokenTuple authTokenTuple);
 }
