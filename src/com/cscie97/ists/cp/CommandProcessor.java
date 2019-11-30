@@ -12,16 +12,16 @@ import com.cscie97.ists.resource.Subject;
 
 public class CommandProcessor
 {
-    com.cscie97.ists.authentication.CommandProcessor authenticatorCp;
-    com.cscie97.ledger.CommandProcessor ledgerCp;
-    ResourceManagementService resourceImpl;
-    AuthToken hardcodedUserAuthToken;
-    FlightManagementService manager;
+    public com.cscie97.ists.authentication.CommandProcessor authenticatorCp;
+    public com.cscie97.ledger.CommandProcessor ledgerCp;
+    public ResourceManagementService resourceImpl;
+    public AuthToken hardcodedUserAuthToken;
+    public FlightManagementService manager;
     
     public CommandProcessor()
     {        
-        ledgerCp = new com.cscie97.ledger.CommandProcessor();
         StoreAuthenticationService authenticator = new Authenticator();
+        ledgerCp = new com.cscie97.ledger.CommandProcessor();        
         authenticatorCp = new com.cscie97.ists.authentication.CommandProcessor(authenticator, ledgerCp);
         // Login CommandProcessor with hardcoded User credentials so can operate Authenticator methods
         hardcodedUserAuthToken = authenticator.login(Authenticator.getHardcodedUserUsername(), Authenticator.getHardcodedUserPassword());
@@ -63,7 +63,7 @@ public class CommandProcessor
         resourceImpl.getBudget(new AuthTokenTuple(hardcodedUserAuthToken));
         
         String spaceshipId = null;
-        resourceImpl.createEvent(spaceshipId, "Testing", new AuthTokenTuple(hardcodedUserAuthToken));
+        resourceImpl.createEvent(spaceshipId, "Test ing", new AuthTokenTuple(hardcodedUserAuthToken));
     } 
     
     public void parseAndProcess(String input)

@@ -73,8 +73,7 @@ public class ResourceImpl implements ResourceManagementService, Subject
         String[] eventToSend = sourceDevice.event(simulatedEvent);*/
         
         Spaceship sourceDevice = null;
-        String[] eventToSend = new String[1];
-        eventToSend[0] = simulatedEvent;
+        String[] eventToSend = simulatedEvent.split("\\s+");
         
         // Notify observers of the event sent back from device
         notifyObservers(sourceDevice, eventToSend);   
@@ -102,6 +101,9 @@ public class ResourceImpl implements ResourceManagementService, Subject
     public void addEntityToTeam(String entityId, String teamId, AuthTokenTuple authTokenTuple) {
         
         Team team = (Team) entities.get(teamId);
+        
+        // If entity is a team put team on entity's parentTeam 
+        
         team.entities.put(entityId, entities.get(entityId));
     }
     

@@ -6,6 +6,7 @@ public class Team extends Entity
 {
     String type;
     LinkedHashMap<String, Entity> entities;
+    Team parentTeam;
     
     public Team(String id, String name, String description, String type)
     {

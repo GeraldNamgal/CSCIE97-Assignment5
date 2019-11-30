@@ -71,40 +71,95 @@ public class Manager implements Observer, FlightManagementService {
         // Get event's string array
         String[] eventStrArr = event.getPerceivedEvent();
         
-        String command = "";
+        String eventString = "";
         for (String string : eventStrArr)
         {
-            command += string + " ";
+            eventString += string + " ";
         }
         
-        command = command.trim();
-       
-        if (command.equals("Testing"))
-        {    
-            System.out.println("In handleEvent!");
-            
+        eventString = eventString.trim();
+        
+        if (eventString.equals("status update"))
+        {        
             // Create new Emergency               
-            Command emergency = new Emergency(event.getSourceDevice());
+            Command statusUpdate = new StatusUpdateCommand(event.getSourceDevice());            
             
-            System.out.println("EMERGENCY EVENT received. Emergency Command created and executing...");
+            // Run the Command's execute method
+            statusUpdate.execute();
+        }
+        
+        if (eventString.equals("emergency"))
+        {        
+            // Create new Emergency               
+            Command emergency = new EmergencyCommand(event.getSourceDevice());            
             
             // Run the Command's execute method
             emergency.execute();
         }
+        
+        if (eventString.equals("Test ing"))
+        {
+            Command testCommand = new TestCommand(event.getSourceDevice());
+            testCommand.execute();
+        }
     }
     
-    public class Emergency extends Command
+    /* Nested classes */
+    
+    public class TestCommand extends Command
     {      
         /* Variables */        
         
-        public Emergency(Spaceship sourceDevice)
+        
+        
+        public TestCommand(Spaceship sourceDevice)
         {
             super(sourceDevice);            
         }
 
         public void execute()
         {
-            System.out.println("In Emergency's execute()!");
+            
+        }            
+    }
+    
+    public class StatusUpdateCommand extends Command
+    {      
+        /* Variables */
+        
+        String status;
+        
+        public StatusUpdateCommand(Spaceship sourceDevice)
+        {
+            super(sourceDevice);            
+        }
+
+        public void execute()
+        {
+            // Change the ship's status
+            sourceDevice.status = status;
+            
+            // TODO: If status update was "Reached destination" then also do ReachedDestinationCommand
+        }            
+    }
+    
+    public class EmergencyCommand extends Command
+    {      
+        /* Variables */        
+        
+        String type;
+        
+        public EmergencyCommand(Spaceship sourceDevice)
+        {
+            super(sourceDevice);            
+        }
+
+        public void execute()
+        {
+            // Get spaceship's location
+            String coordinates = sourceDevice.coordinates;
+            
+            // Define rescue flight to send
         }            
     }
 }
