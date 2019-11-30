@@ -8,8 +8,8 @@ public class Spaceship {
     public Integer maxSpeed;
     public String fuelType;
     public String type;
-    public Cargo cargo;
-    public Passenger passenger;
+    public CargoShip cargoShip;
+    public PassengerShip passengerShip;
     public Integer fuelCapacity;
     public Integer fuelLevel = 0;
     public String description;
@@ -44,7 +44,7 @@ public class Spaceship {
         this.description = description;
         this.status = "available";
        
-        cargo = new Cargo(cargoType);            
+        cargoShip = new CargoShip(cargoType);            
     }
     
     // Passenger
@@ -61,7 +61,7 @@ public class Spaceship {
         this.description = description;
         this.status = "available";
         
-        passenger = new Passenger(capacity, classType);
+        passengerShip = new PassengerShip(capacity, classType);
     }
     
     // Rescue
@@ -80,22 +80,22 @@ public class Spaceship {
     
     
     
-    public class Cargo
+    public class CargoShip
     {
         String cargoType;
         
-        public Cargo(String cargoType)
+        public CargoShip(String cargoType)
         {
             this.cargoType = cargoType;
         }
     }
     
-    public class Passenger
+    public class PassengerShip
     {
         Integer capacity;
         String classType;
         
-        public Passenger(Integer capacity, String classType)
+        public PassengerShip(Integer capacity, String classType)
         {
             this.capacity = capacity;
             this.classType = classType;
