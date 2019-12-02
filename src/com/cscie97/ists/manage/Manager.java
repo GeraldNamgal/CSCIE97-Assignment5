@@ -44,7 +44,7 @@ public class Manager implements Observer, FlightManagementService {
         resourceImpl.getSpaceships(null);
         
         // If no available spaceships, create one
-        Spaceship spaceship = new Spaceship(null, null, null, null, null, null, null);
+        Spaceship spaceship = null;
         
         // Check flights list for availabilities for booking
         

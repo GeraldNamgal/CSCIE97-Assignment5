@@ -2,34 +2,37 @@ package com.cscie97.ists.customer;
 
 import java.util.LinkedHashMap;
 
-public class PointOfInterest {
+public class WelcomePackage {
 
     String id;
     String name;
-    String type;
     String description;
-    String location;
+    
     public LinkedHashMap<String, Image> images;
     public LinkedHashMap<String, Note> notes;
+    public LinkedHashMap<String, Movie> movies;
     
-    public PointOfInterest(String id, String name, String type, String description, String location)
+    public WelcomePackage(String id, String name, String description)
     {
         this.id = id;
-        this.name = name;
-        this.type = type;
-        this.description = description;
-        this.location = location;
+        this.name = name;        
+        this.description = description;        
     }
     
     /* Methods */
     
     public void addImage(Image image)
     {
-        // Add image to images list
+        // Add to list
     }
     
     public void addNote(Note note)
     {
-        // Add note to notes list
+        // Add to list
+    }
+    
+    public void addMovie(Movie movie)
+    {
+        // Add to list
     }
 }

@@ -4,6 +4,8 @@ import com.cscie97.ists.authentication.AuthToken;
 import com.cscie97.ists.authentication.AuthTokenTuple;
 import com.cscie97.ists.authentication.Authenticator;
 import com.cscie97.ists.authentication.StoreAuthenticationService;
+import com.cscie97.ists.customer.CustomerImpl;
+import com.cscie97.ists.customer.CustomerService;
 import com.cscie97.ists.manage.FlightManagementService;
 import com.cscie97.ists.manage.Manager;
 import com.cscie97.ists.resource.ResourceImpl;
@@ -14,9 +16,10 @@ public class CommandProcessor
 {
     public com.cscie97.ists.authentication.CommandProcessor authenticatorCp;
     public com.cscie97.ledger.CommandProcessor ledgerCp;
-    public ResourceManagementService resourceImpl;
     public AuthToken hardcodedUserAuthToken;
+    public ResourceManagementService resourceImpl;    
     public FlightManagementService manager;
+    public CustomerService customerImpl;
     
     public CommandProcessor()
     {        
@@ -28,6 +31,8 @@ public class CommandProcessor
         
         resourceImpl = new ResourceImpl(ledgerCp, authenticator);
         manager = new Manager((Subject) resourceImpl, authenticator);
+        customerImpl = new CustomerImpl(manager, ledgerCp);
+        
     }
     
     /* *

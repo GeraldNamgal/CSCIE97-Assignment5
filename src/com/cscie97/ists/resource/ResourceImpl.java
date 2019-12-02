@@ -127,7 +127,7 @@ public class ResourceImpl implements ResourceManagementService, Subject
     public Spaceship defineSpaceship(String id, String model, String name, Integer maxSpeed, String fuelType,
             String cargoType, Integer fuelCapacity, String description, AuthTokenTuple authTokenTuple) {
         
-        Spaceship spaceship = new Spaceship(id, model, name, maxSpeed, fuelType, cargoType, fuelCapacity, description);
+        Spaceship spaceship = null;
         spaceships.put(id, spaceship);
         
         return spaceship;
@@ -138,7 +138,7 @@ public class ResourceImpl implements ResourceManagementService, Subject
     public Spaceship defineSpaceship(String id, String model, String name, Integer maxSpeed, String fuelType,
             Integer capacity, String classType, Integer fuelCapacity, String description, AuthTokenTuple authTokenTuple) {
         
-        Spaceship spaceship = new Spaceship(id, model, name, maxSpeed, fuelType, capacity, classType, fuelCapacity, description);
+        Spaceship spaceship = null;
         spaceships.put(id, spaceship);
         
         return spaceship;
@@ -149,7 +149,7 @@ public class ResourceImpl implements ResourceManagementService, Subject
     public Spaceship defineSpaceship(String id, String model, String name, Integer maxSpeed, String fuelType,
             Integer fuelCapacity, String description, AuthTokenTuple authTokenTuple) {
         
-        Spaceship spaceship = new Spaceship(id, model, name, maxSpeed, fuelType, fuelCapacity, description);
+        Spaceship spaceship = null;
         spaceships.put(id, spaceship);
         
         return spaceship;

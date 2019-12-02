@@ -1,5 +1,7 @@
 package com.cscie97.ists.resource;
 
+import java.util.ArrayList;
+
 public class Spaceship {
 
     public String id;
@@ -10,6 +12,7 @@ public class Spaceship {
     public String type;
     public CargoShip cargoShip;
     public PassengerShip passengerShip;
+    public RescueShip rescueShip;
     public Integer fuelCapacity;
     public Integer fuelLevel = 0;
     public String description;
@@ -17,6 +20,8 @@ public class Spaceship {
     public String trajectory;
     public String coordinates;
     public String status;
+    public Integer crewCapacity;
+    public ArrayList<String> passengerIds;
         
         
         
@@ -32,7 +37,7 @@ public class Spaceship {
     
     // Cargo
     public Spaceship(String id, String model, String name, Integer maxSpeed, String fuelType, String cargoType
-            , Integer fuelCapacity, String description)
+            , Integer fuelCapacity, Integer crewCapacity, String description)
     {
         this.id = id;
         this.model = model;
@@ -49,7 +54,7 @@ public class Spaceship {
     
     // Passenger
     public Spaceship(String id, String model, String name, Integer maxSpeed, String fuelType, Integer capacity
-            , String classType, Integer fuelCapacity, String description)
+            , String classType, Integer fuelCapacity, Integer crewCapacity, String description)
     {
         this.id = id;
         this.model = model;
@@ -65,7 +70,8 @@ public class Spaceship {
     }
     
     // Rescue
-    public Spaceship(String id, String model, String name, Integer maxSpeed, String fuelType, Integer fuelCapacity, String description)
+    public Spaceship(String id, String model, String name, Integer maxSpeed, String fuelType, Integer fuelCapacity,
+            Integer capacity, Integer crewCapacity, String description)
     {
         this.id = id;
         this.model = model;
@@ -76,6 +82,8 @@ public class Spaceship {
         this.fuelCapacity = fuelCapacity;
         this.description = description;
         this.status = "available";
+        
+        rescueShip = new RescueShip(capacity);
     }
     
     
@@ -93,7 +101,7 @@ public class Spaceship {
     public class PassengerShip
     {
         Integer capacity;
-        String classType;
+        String classType;        
         
         public PassengerShip(Integer capacity, String classType)
         {
@@ -102,6 +110,15 @@ public class Spaceship {
         }
     }
     
+    public class RescueShip
+    {
+        Integer capacity;
+        
+        public RescueShip(Integer capacity)
+        {
+            this.capacity = capacity;
+        }
+    }
     
     
     public void addFuel(Integer amount)
