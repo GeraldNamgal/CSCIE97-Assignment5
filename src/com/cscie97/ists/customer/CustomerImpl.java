@@ -15,15 +15,15 @@ public class CustomerImpl implements CustomerService {
     LinkedHashMap<String, Passenger> passengers;
     LinkedHashMap<String, Passenger> credentialUserIndexes;
     LinkedHashMap<String, PointOfInterest> pointsOfInterest;
-        LinkedHashMap<String, Image> images;
-        LinkedHashMap<String, Note> notes;
-        LinkedHashMap<String, FlightBooking> flightBookings;
-        LinkedHashMap<String, TravelDocument> travelDocuments;
+    LinkedHashMap<String, Image> images;
+    LinkedHashMap<String, Note> notes;
+    LinkedHashMap<String, FlightBooking> flightBookings;
+    LinkedHashMap<String, TravelDocument> travelDocuments;
     LinkedHashMap<String, WelcomePackage> welcomePackages;
-        LinkedHashMap<String, ExperienceDocument> experienceDocuments;
+    LinkedHashMap<String, ExperienceDocument> experienceDocuments;
     LinkedHashMap<String, Movie> movies;
-        LinkedHashMap<String, VideoRecording> videoRecordings;
-        LinkedHashMap<String, AudioRecording> audioRecordings;
+    LinkedHashMap<String, VideoRecording> videoRecordings;
+    LinkedHashMap<String, AudioRecording> audioRecordings;
         
     /* Constructor */
     
@@ -161,7 +161,8 @@ public class CustomerImpl implements CustomerService {
     }   
     
     @Override
-    public void defineTravelDoc() {
+    public void defineTravelDoc(String flightNumber, String ticketId, String passengerId, String destination, String dateTime, Integer price
+            , String boardPassIpnsKeyName, String passportId, String visaId) {
         
         TravelDocument travelDocument = null;
         

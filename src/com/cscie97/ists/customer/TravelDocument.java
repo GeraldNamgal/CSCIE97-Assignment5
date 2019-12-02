@@ -14,6 +14,16 @@ public class TravelDocument {
     
     /* Methods */
     
+    public void addPassportId(String passengerId, String passportId)
+    {
+        
+    }
+    
+    public void addVisaId(String passengerId, String passportId)
+    {
+        
+    }
+    
     public void addWelcomePackage(WelcomePackage welcomePackage)
     {
         // Add to list
