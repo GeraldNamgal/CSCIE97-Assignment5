@@ -25,7 +25,7 @@ public interface CustomerService {
     LinkedHashMap<String, TravelDocument> getTravelDocs(AuthTokenTuple authTokenTuple); // User-specific
     WelcomePackage defineWelcomePackage(String id, String name, String description, AuthTokenTuple authTokenTuple); // Admin only
     LinkedHashMap<String, WelcomePackage> getWelcomePackages(AuthTokenTuple authTokenTuple); // Any user but only admin can modify/mutate; others can only get    
-    Movie defineMovie(String ipnsKeyName, String id, String name, String description, String source, AuthTokenTuple authTokenTuple); // Any user
+    Movie defineMovie(String ipnsKeyName, String id, String name, String description, String source, AuthTokenTuple authTokenTuple); // Admin
     LinkedHashMap<String, Movie> getMovies(AuthTokenTuple authTokenTuple); // Any user
     AudioRecording defineAudioRecording(String ipnsKeyName, String id, String name, String description, String source, AuthTokenTuple authTokenTuple); // Any user
     LinkedHashMap<String, AudioRecording> getAudioRecordings(AuthTokenTuple authTokenTuple); // User-specific
@@ -35,5 +35,8 @@ public interface CustomerService {
     LinkedHashMap<String, ExperienceDocument> getExperienceDocuments(AuthTokenTuple authTokenTuple); // User-specific    
     Note defineFeedback(String id, String description, String message, AuthTokenTuple authTokenTuple); // Any user
     LinkedHashMap<String, Note> getFeedback(AuthTokenTuple authTokenTuple); // User-specific
-    
+    Book defineBook(String ipnsKeyName, String id, String name, String description, String source, AuthTokenTuple authTokenTuple); // Any user
+    LinkedHashMap<String, Book> getBooks(AuthTokenTuple authTokenTuple); // Any user
+    Music defineMusic(String ipnsKeyName, String id, String name, String description, String source, AuthTokenTuple authTokenTuple); // Any user
+    LinkedHashMap<String, Music> getMusic(AuthTokenTuple authTokenTuple); // Any user
 }

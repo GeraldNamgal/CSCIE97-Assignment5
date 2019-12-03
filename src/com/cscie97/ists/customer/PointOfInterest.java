@@ -2,6 +2,8 @@ package com.cscie97.ists.customer;
 
 import java.util.LinkedHashMap;
 
+import com.cscie97.ists.authentication.AuthTokenTuple;
+
 public class PointOfInterest {
 
     String id;
@@ -23,12 +25,12 @@ public class PointOfInterest {
     
     /* Methods */
     
-    public void addImage(Image image)
+    public void addImage(Image image, AuthTokenTuple authTokenTuple)
     {
         // Add image to images list
     }
     
-    public void addNote(Note note)
+    public void addNote(Note note, AuthTokenTuple authTokenTuple)
     {
         // Add note to notes list
     }

@@ -26,6 +26,8 @@ public class CustomerImpl implements CustomerService {
     LinkedHashMap<String, VideoRecording> videoRecordings;
     LinkedHashMap<String, AudioRecording> audioRecordings;
     LinkedHashMap<String, Note> feedback;
+    LinkedHashMap<String, Music> music;
+    LinkedHashMap<String, Book> books;
         
     /* Constructor */
     
@@ -282,5 +284,29 @@ public class CustomerImpl implements CustomerService {
     public LinkedHashMap<String, Note> getFeedback(AuthTokenTuple authTokenTuple) {
         
         return feedback;
+    }
+
+    @Override
+    public Book defineBook(String ipnsKeyName, String id, String name, String description, String source,
+            AuthTokenTuple authTokenTuple) {
+
+        return null;
+    }
+    
+    @Override
+    public LinkedHashMap<String, Book> getBooks(AuthTokenTuple authTokenTuple) {
+        return books;
+    }
+
+    @Override
+    public Music defineMusic(String ipnsKeyName, String id, String name, String description, String source,
+            AuthTokenTuple authTokenTuple) {
+
+        return null;
+    }   
+
+    @Override
+    public LinkedHashMap<String, Music> getMusic(AuthTokenTuple authTokenTuple) {
+        return music;
     }                     
 }
