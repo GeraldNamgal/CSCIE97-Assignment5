@@ -1,5 +1,7 @@
 package com.cscie97.ists.resource;
 
+import com.cscie97.ists.authentication.AuthTokenTuple;
+
 public class Fuel {
 
     String typeId;
@@ -18,12 +20,12 @@ public class Fuel {
     
     
     
-    public void addFuelSupply(Integer amount)
+    public void addFuelSupply(Integer amount, AuthTokenTuple authTokenTuple)
     {
         this.amount = this.amount + amount;
     }
     
-    public void deductFuelSupply(Integer amount)
+    public void deductFuelSupply(Integer amount, AuthTokenTuple authTokenTuple)
     {
         // TODO: Make sure amount doesn't go under zero
         

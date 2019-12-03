@@ -13,6 +13,7 @@ import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 
 import com.cscie97.ists.authentication.AuthToken;
+import com.cscie97.ists.authentication.AuthTokenTuple;
 
 
 public class Manager implements Observer, FlightManagementService {
@@ -22,7 +23,7 @@ public class Manager implements Observer, FlightManagementService {
     ResourceManagementService resourceImpl;
     StoreAuthenticationService authenticator;
     AuthToken myAuthToken;
-    LinkedHashMap<String, Flight> flights;
+    public LinkedHashMap<String, Flight> flights;
 
     public Manager(Subject resourceImpl, StoreAuthenticationService authenticator)
     {       
@@ -38,7 +39,7 @@ public class Manager implements Observer, FlightManagementService {
     
     @Override
     public Flight defineFlight(String id, String number, String time, String location, String destination, String duration, Integer numStops
-            , Integer capacity, String crewId, Integer ticketPrice, Integer passengerCount)
+            , Integer capacity, String crewId, Integer ticketPrice, Integer passengerCount, AuthTokenTuple authTokenTuple)
     {
         // Find available spaceships
         resourceImpl.getSpaceships(null);
@@ -56,6 +57,11 @@ public class Manager implements Observer, FlightManagementService {
         flights.put(id, flight);
         
         return flight;
+    }
+    
+    @Override
+    public LinkedHashMap<String, Flight> getFlights(AuthTokenTuple authTokenTuple) {
+        return flights;
     }
     
     
@@ -161,5 +167,5 @@ public class Manager implements Observer, FlightManagementService {
             
             // Define rescue flight to send
         }            
-    }
+    }   
 }

@@ -2,6 +2,8 @@ package com.cscie97.ists.resource;
 
 import java.util.ArrayList;
 
+import com.cscie97.ists.authentication.AuthTokenTuple;
+
 public class Spaceship {
 
     public String id;
@@ -121,12 +123,12 @@ public class Spaceship {
     }
     
     
-    public void addFuel(Integer amount)
+    public void addFuel(Integer amount, AuthTokenTuple authTokenTuple)
     {
         fuelLevel = fuelLevel + amount;
     }
     
-    public void consumeFuel(Integer amount)
+    public void consumeFuel(Integer amount, AuthTokenTuple authTokenTuple)
     {
         fuelLevel = fuelLevel - amount;
     }

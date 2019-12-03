@@ -31,7 +31,7 @@ public class CommandProcessor
         
         resourceImpl = new ResourceImpl(ledgerCp, authenticator);
         manager = new Manager((Subject) resourceImpl, authenticator);
-        customerImpl = new CustomerImpl(manager, ledgerCp);
+        customerImpl = new CustomerImpl(manager, ledgerCp, resourceImpl);
         
     }
     

@@ -4,14 +4,12 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 import com.cscie97.ists.authentication.AuthTokenTuple;
-// TODO: Remove? -- import com.cscie97.ists.resource.Inventory;
 import com.cscie97.ists.authentication.GetPermissionsVisitor;
 import com.cscie97.ists.authentication.StoreAuthenticationService;
 
 public class ResourceImpl implements ResourceManagementService, Subject
 {
     LinkedHashMap<String, Entity> entities;
-    LinkedHashMap<String, Entity> officialEntities;
     LinkedHashMap<String, Launchpad> launchpads;
     LinkedHashMap<String, Spaceship> spaceships;
     CommunicationSystem communicationSystem;
@@ -19,7 +17,6 @@ public class ResourceImpl implements ResourceManagementService, Subject
     LinkedHashMap<String, Fuel> fuels;
     com.cscie97.ledger.CommandProcessor ledgerCp;
     LinkedHashMap<String, Integer> prices;
-    // TODO: Remove? -- LinkedHashMap<String, Inventory> inventories;
     StoreAuthenticationService authenticator;
     
     ArrayList<Observer> observers;
@@ -96,22 +93,6 @@ public class ResourceImpl implements ResourceManagementService, Subject
         
         return team;
     } 
-    
-    @Override
-    public void addEntityToTeam(String entityId, String teamId, AuthTokenTuple authTokenTuple) {
-        
-        Team team = (Team) entities.get(teamId);
-        
-        // If entity is a team put team on entity's parentTeam 
-        
-        team.entities.put(entityId, entities.get(entityId));
-    }
-    
-    @Override
-    public void makeEntityOfficial(String entityId)
-    {
-        officialEntities.put(entityId, entities.get(entityId));
-    }
 
     @Override
     public Launchpad defineLaunchPad(String id, String name, String location, AuthTokenTuple authTokenTuple) {
@@ -154,20 +135,6 @@ public class ResourceImpl implements ResourceManagementService, Subject
         
         return spaceship;
     }
-
-    /* TODO: Remove? -- @Override
-    public Inventory defineInventory(String id, String launchpadId, String spaceshipId) {
-
-        Inventory inventory = new Inventory(id, launchpadId, spaceshipId);        
-        
-        if (inventory != null)
-        {
-            // Add inventory id and its associated store to inventories list
-            inventories.put(id, inventory);            
-        }
-        
-        return inventory;
-    }*/ 
     
     @Override
     public CommunicationSystem defineCommunicationSystem(String id, AuthTokenTuple authTokenTuple) {
@@ -185,17 +152,7 @@ public class ResourceImpl implements ResourceManagementService, Subject
         this.computerSystem = new ComputerSystem(id);
         
         return computerSystem;
-    }    
-    
-    @Override
-    public void giveSpaceshipFuel(String spaceshipId, Integer amount, AuthTokenTuple authTokenTuple) {
-        
-        // TODO: Make sure amount doesn't go over capacity
-        
-        Spaceship spaceship = spaceships.get(spaceshipId);
-        spaceship.addFuel(amount);
-        fuels.get(spaceship.fuelType).deductFuelSupply(amount);
-    }
+    }      
     
     @Override
     public Fuel defineFuel(String typeId, Integer amount, AuthTokenTuple authTokenTuple) {
@@ -252,13 +209,6 @@ public class ResourceImpl implements ResourceManagementService, Subject
     @Override
     public LinkedHashMap<String, Entity> getEntities(AuthTokenTuple authTokenTuple) {
         return entities;
-    }
-
-
-
-    @Override
-    public LinkedHashMap<String, Entity> getOfficialEntities(AuthTokenTuple authTokenTuple) {
-        return officialEntities;
     }
 
 

@@ -4,7 +4,9 @@ import java.util.LinkedHashMap;
 
 import com.cscie97.ists.authentication.AuthTokenTuple;
 import com.cscie97.ists.authentication.Credential;
+import com.cscie97.ists.manage.Flight;
 import com.cscie97.ists.manage.FlightManagementService;
+import com.cscie97.ists.resource.ResourceManagementService;
 
 
 public class CustomerImpl implements CustomerService {
@@ -12,6 +14,7 @@ public class CustomerImpl implements CustomerService {
     String repositoryIpnsKeyName;
     FlightManagementService manager;
     com.cscie97.ledger.CommandProcessor ledgerCp;
+    ResourceManagementService resourceImpl;
     
     LinkedHashMap<String, Passenger> passengers;
     LinkedHashMap<String, Passenger> credentialUserIndexes;
@@ -31,12 +34,13 @@ public class CustomerImpl implements CustomerService {
         
     /* Constructor */
     
-    public CustomerImpl(FlightManagementService manager, com.cscie97.ledger.CommandProcessor ledgerCp)
+    public CustomerImpl(FlightManagementService manager, com.cscie97.ledger.CommandProcessor ledgerCp, ResourceManagementService resourceImpl)
     {
         // TODO: ???
         
         this.manager = manager;
         this.ledgerCp = ledgerCp;
+        this.resourceImpl = resourceImpl;
         
         // TODO: Create a database (i.e., text file?) on IPFS to store data and to retrieve repositoryIpnsKeyName
     }
@@ -74,6 +78,12 @@ public class CustomerImpl implements CustomerService {
         
         // Uploads and merges local customer service data (including updates) to the central remote Ipfs repo; merge conflicts
         // are handled...; database can be a json text file...; ...?
+    }
+    
+    @Override
+    public LinkedHashMap<String, Flight> getFlights(AuthTokenTuple authTokenTuple) {
+        
+        return manager.getFlights(new AuthTokenTuple(null));
     }
     
     @Override
@@ -308,5 +318,5 @@ public class CustomerImpl implements CustomerService {
     @Override
     public LinkedHashMap<String, Music> getMusic(AuthTokenTuple authTokenTuple) {
         return music;
-    }                     
+    }                        
 }

@@ -2,6 +2,8 @@ package com.cscie97.ists.customer;
 
 import java.util.LinkedHashMap;
 
+import com.cscie97.ists.authentication.AuthTokenTuple;
+
 public abstract class Document {
     
     String id;
@@ -19,7 +21,7 @@ public abstract class Document {
     
     /* Methods */
         
-    public void addNote(Note note)
+    public void addNote(Note note, AuthTokenTuple authTokenTuple)
     {
         // Add to list
     }   

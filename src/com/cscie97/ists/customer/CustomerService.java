@@ -3,11 +3,13 @@ package com.cscie97.ists.customer;
 import java.util.LinkedHashMap;
 
 import com.cscie97.ists.authentication.AuthTokenTuple;
+import com.cscie97.ists.manage.Flight;
 
 public interface CustomerService {
 
     void pullFromIpfsRepo(String ipnsKeyName, AuthTokenTuple authTokenTuple); // Any user
     void pushToIpfsRepo(String ipnsKeyName, AuthTokenTuple authTokenTuple); // Any user
+    LinkedHashMap<String, Flight> getFlights(AuthTokenTuple authTokenTuple);
     Passenger registerPassenger(String id, String name, String account, String email, AuthTokenTuple authTokenTuple); // Public    
     LinkedHashMap<String, Passenger> getPassengers(AuthTokenTuple authTokenTuple); // User-specific   
     void addPassengerCredential(String passengerId, String type, String value, AuthTokenTuple authTokenTuple); // User-specific   
