@@ -19,8 +19,8 @@ public interface ResourceManagementService
     Spaceship defineSpaceship(String id, String model, String name, Integer maxSpeed, String fuelType, Integer fuelCapacity
             , String description, AuthTokenTuple authTokenTuple);
     // TODO: Remove? -- Inventory defineInventory(String id, String launchpadId, String spaceshipId);
-    void defineCommunicationSystem(String id, AuthTokenTuple authTokenTuple);
-    void defineComputerSystem(String id, AuthTokenTuple authTokenTuple);
+    CommunicationSystem defineCommunicationSystem(String id, AuthTokenTuple authTokenTuple);
+    ComputerSystem defineComputerSystem(String id, AuthTokenTuple authTokenTuple);
     void giveSpaceshipFuel(String spaceshipId, Integer amount, AuthTokenTuple authTokenTuple);        
     void addResourcePrice(String resourceName, Integer price, AuthTokenTuple authTokenTuple);    
     void buyResource(String resourceName, Integer amount, AuthTokenTuple authTokenTuple);

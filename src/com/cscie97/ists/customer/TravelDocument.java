@@ -6,7 +6,7 @@ public class TravelDocument {
     
     public LinkedHashMap<String, WelcomePackage> welcomePackages;
 
-    public TravelDocument(String flightNumber, String ticketId, String passengerId, String destination, String dateTime, Integer price
+    public TravelDocument(String id, String flightNumber, String ticketId, String passengerName, String destination, String dateTime, Integer price
             , String boardPassIpnsKeyName, String passportId, String visaId)
     {
         

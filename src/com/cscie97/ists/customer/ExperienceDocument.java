@@ -4,8 +4,7 @@ import java.util.LinkedHashMap;
 
 public class ExperienceDocument {
 
-    String passengerId;
-    String documentId;
+    String id;
     String name;
     String description;
     
@@ -14,10 +13,9 @@ public class ExperienceDocument {
     public LinkedHashMap<String, VideoRecording> videoRecordings;
     public LinkedHashMap<String, AudioRecording> audioRecordings;
     
-    public ExperienceDocument(String passengerId, String documentId, String name, String description)
+    public ExperienceDocument(String id, String name, String description)
     {
-        this.passengerId = passengerId;
-        this.documentId = documentId;
+        this.id = id;
         this.name = name;        
         this.description = description;        
     }

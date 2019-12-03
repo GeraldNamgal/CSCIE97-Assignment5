@@ -170,17 +170,21 @@ public class ResourceImpl implements ResourceManagementService, Subject
     }*/ 
     
     @Override
-    public void defineCommunicationSystem(String id, AuthTokenTuple authTokenTuple) {
+    public CommunicationSystem defineCommunicationSystem(String id, AuthTokenTuple authTokenTuple) {
         
         CommunicationSystem communicationSystem = new CommunicationSystem(id);
         
-        this.communicationSystem = communicationSystem;   
+        this.communicationSystem = communicationSystem;
+        
+        return communicationSystem;
     }
 
     @Override
-    public void defineComputerSystem(String id, AuthTokenTuple authTokenTuple) {
+    public ComputerSystem defineComputerSystem(String id, AuthTokenTuple authTokenTuple) {
         
-        this.computerSystem = new ComputerSystem(id);       
+        this.computerSystem = new ComputerSystem(id);
+        
+        return computerSystem;
     }    
     
     @Override
