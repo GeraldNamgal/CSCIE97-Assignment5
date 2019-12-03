@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 
 import com.cscie97.ists.authentication.AuthTokenTuple;
 import com.cscie97.ists.authentication.Credential;
+import com.cscie97.ists.authentication.StoreAuthenticationService;
 import com.cscie97.ists.manage.Flight;
 import com.cscie97.ists.manage.FlightManagementService;
 import com.cscie97.ists.resource.ResourceManagementService;
@@ -15,6 +16,7 @@ public class CustomerImpl implements CustomerService {
     FlightManagementService manager;
     com.cscie97.ledger.CommandProcessor ledgerCp;
     ResourceManagementService resourceImpl;
+    StoreAuthenticationService authenticator;
     
     LinkedHashMap<String, Passenger> passengers;
     LinkedHashMap<String, Passenger> credentialUserIndexes;
@@ -34,13 +36,15 @@ public class CustomerImpl implements CustomerService {
         
     /* Constructor */
     
-    public CustomerImpl(FlightManagementService manager, com.cscie97.ledger.CommandProcessor ledgerCp, ResourceManagementService resourceImpl)
+    public CustomerImpl(FlightManagementService manager, com.cscie97.ledger.CommandProcessor ledgerCp, ResourceManagementService resourceImpl
+            , StoreAuthenticationService authenticator)
     {
         // TODO: ???
         
         this.manager = manager;
         this.ledgerCp = ledgerCp;
         this.resourceImpl = resourceImpl;
+        this.authenticator = authenticator;
         
         // TODO: Create a database (i.e., text file?) on IPFS to store data and to retrieve repositoryIpnsKeyName
     }
