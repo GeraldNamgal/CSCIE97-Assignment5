@@ -24,6 +24,7 @@ public class CustomerImpl implements CustomerService {
     LinkedHashMap<String, Movie> movies;
     LinkedHashMap<String, VideoRecording> videoRecordings;
     LinkedHashMap<String, AudioRecording> audioRecordings;
+    LinkedHashMap<String, Note> feedback;
         
     /* Constructor */
     
@@ -103,6 +104,12 @@ public class CustomerImpl implements CustomerService {
     }
     
     @Override
+    public LinkedHashMap<String, Passenger> getPassengers() {
+        
+        return passengers;
+    }
+    
+    @Override
     public PointOfInterest definePointOfInterest(String id, String name, String type, String description,
             String location) {
         
@@ -152,29 +159,41 @@ public class CustomerImpl implements CustomerService {
     }
     
     @Override
-    public void bookFlight(String id, String flightNumber, String destination, String passengerId, Integer price, String type
+    public FlightBooking bookFlight(String id, String flightNumber, String destination, String passengerId, Integer price, String type
             , String departureTime, String returnTime)
     {
         FlightBooking flightBooking = null;
         
         // Add to list of flightBookings
-    }   
+        
+        return flightBooking;
+    }
     
     @Override
-    public void defineTravelDoc(String flightNumber, String ticketId, String passengerId, String destination, String dateTime, Integer price
+    public LinkedHashMap<String, FlightBooking> getFlightBookings() {
+        
+        return flightBookings;
+    }
+    
+    @Override
+    public TravelDocument defineTravelDoc(String flightNumber, String ticketId, String passengerId, String destination, String dateTime, Integer price
             , String boardPassIpnsKeyName, String passportId, String visaId) {
         
         TravelDocument travelDocument = null;
         
         // Add to list of travelDocuments
+        
+        return travelDocument;
     }
     
     @Override
-    public void defineWelcomePackage(String id, String name, String description) {
+    public WelcomePackage defineWelcomePackage(String id, String name, String description) {
         
         WelcomePackage welcomePackage = null;
         
         // Add to list of welcomePackages
+        
+        return welcomePackage;
     }
 
     @Override
@@ -247,12 +266,18 @@ public class CustomerImpl implements CustomerService {
     }
 
     @Override
-    public Note defineFeedback() {
-        // TODO Auto-generated method stub
-        return null;
+    public Note defineFeedback(String id, String description, String message) {
+         
+        Note note = null;
+        
+        // Add to list of feedback
+        
+        return note;
     }
 
-    
-
-              
+    @Override
+    public LinkedHashMap<String, Note> getFeedback() {
+        
+        return feedback;
+    }                     
 }
