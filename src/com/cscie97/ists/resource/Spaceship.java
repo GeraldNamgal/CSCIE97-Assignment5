@@ -135,9 +135,8 @@ public class Spaceship {
 
     public Integer getFuelLevel(AuthTokenTuple authTokenTuple) {
         return fuelLevel;
-
  
-   }
+    }
 
     public void setFuelLevel(Integer fuelLevel, AuthTokenTuple authTokenTuple) {
         this.fuelLevel = fuelLevel;

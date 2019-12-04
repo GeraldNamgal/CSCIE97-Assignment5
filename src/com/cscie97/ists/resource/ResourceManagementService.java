@@ -30,4 +30,5 @@ public interface ResourceManagementService
     CommunicationSystem getCommunicationSystem(AuthTokenTuple authTokenTuple);
     ComputerSystem getComputerSystem(AuthTokenTuple authTokenTuple);
     LinkedHashMap<String, Integer> getResourcePrices(AuthTokenTuple authTokenTuple);
+    EntitiesVisitor visitEntities();
 }

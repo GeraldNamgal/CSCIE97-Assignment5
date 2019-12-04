@@ -26,4 +26,10 @@ public class Team extends Entity
         
         // Add to list
     }
+
+    @Override
+    public void acceptVisitor(Visitor visitor) {
+        
+        visitor.visitTeam(this);
+    }
 }

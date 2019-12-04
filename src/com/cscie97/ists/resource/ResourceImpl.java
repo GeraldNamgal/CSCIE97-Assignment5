@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 import com.cscie97.ists.authentication.AuthTokenTuple;
-import com.cscie97.ists.authentication.GetPermissionsVisitor;
 import com.cscie97.ists.authentication.StoreAuthenticationService;
 
-public class ResourceImpl implements ResourceManagementService, Subject
+public class ResourceImpl implements ResourceManagementService, Subject, Visitable
 {
     LinkedHashMap<String, Entity> entities;
     LinkedHashMap<String, Launchpad> launchpads;
@@ -237,5 +236,22 @@ public class ResourceImpl implements ResourceManagementService, Subject
     @Override
     public LinkedHashMap<String, Integer> getResourcePrices(AuthTokenTuple authTokenTuple) {
         return prices;
+    }
+
+    
+
+    @Override
+    public void acceptVisitor(Visitor visitor) {
+
+        visitor.visitResourceImpl(this);
+    }
+
+    @Override
+    public EntitiesVisitor visitEntities() {
+        
+        EntitiesVisitor entitiesVisitor = null;
+        this.acceptVisitor(entitiesVisitor);
+        
+        return entitiesVisitor;
     } 
 }

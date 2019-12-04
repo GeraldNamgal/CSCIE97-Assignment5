@@ -10,4 +10,10 @@ public class Person extends Entity
         
         this.role = role;
     }
+
+    @Override
+    public void acceptVisitor(Visitor visitor) {
+
+        visitor.visitPerson(this);
+    }
 }
