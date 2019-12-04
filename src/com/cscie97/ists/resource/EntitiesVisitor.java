@@ -16,7 +16,7 @@ public class EntitiesVisitor implements Visitor {
         
         for (Entry<String, Entity> entityEntry : resourceImpl.getEntities(null).entrySet())
         {       
-            traverseTreeAndPrint(entityEntry.getValue(), level);              
+            traverseTree(entityEntry.getValue(), level);              
         }
         
     }
@@ -33,7 +33,7 @@ public class EntitiesVisitor implements Visitor {
         
     }
     
-    public void traverseTreeAndPrint(Visitable entity, Integer level)
+    public void traverseTree(Visitable entity, Integer level)
     {
         levelPtr = level.intValue();
         
