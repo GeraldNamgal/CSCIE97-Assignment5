@@ -29,9 +29,9 @@ public class CommandProcessor
         // Login CommandProcessor with hardcoded User credentials so can operate Authenticator methods
         hardcodedUserAuthToken = authenticator.login(Authenticator.getHardcodedUserUsername(), Authenticator.getHardcodedUserPassword());
         
-        resourceImpl = new ResourceImpl(ledgerCp, authenticator);
-        manager = new Manager((Subject) resourceImpl, authenticator);
-        customerImpl = new CustomerImpl(manager, ledgerCp, resourceImpl, authenticator);        
+        resourceImpl = new ResourceImpl(ledgerCp, authenticator);        
+        customerImpl = new CustomerImpl(ledgerCp, resourceImpl, authenticator);
+        manager = new Manager((Subject) resourceImpl, customerImpl, authenticator);
     }
     
     /* *

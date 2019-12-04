@@ -1,6 +1,7 @@
 package com.cscie97.ists.manage;
 
 import com.cscie97.ists.authentication.StoreAuthenticationService;
+import com.cscie97.ists.customer.CustomerService;
 import com.cscie97.ists.resource.Observer;
 import com.cscie97.ists.resource.ResourceManagementService;
 import com.cscie97.ists.resource.Spaceship;
@@ -8,9 +9,7 @@ import com.cscie97.ists.resource.Subject;
 import com.cscie97.ists.resource.UpdateEvent;
 import com.cscie97.ists.manage.Command;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.Map.Entry;
 
 import com.cscie97.ists.authentication.AuthToken;
 import com.cscie97.ists.authentication.AuthTokenTuple;
@@ -21,16 +20,17 @@ public class Manager implements Observer, FlightManagementService {
     /* Constructor */ 
     
     ResourceManagementService resourceImpl;
+    CustomerService customerImpl;
     StoreAuthenticationService authenticator;
-    AuthToken myAuthToken;
-    public LinkedHashMap<String, Flight> flights;
+    AuthToken myAuthToken;    
 
-    public Manager(Subject resourceImpl, StoreAuthenticationService authenticator)
+    public Manager(Subject resourceImpl, CustomerService customerImpl, StoreAuthenticationService authenticator)
     {       
         // Register Controller with Model Service
         resourceImpl.registerObserver(this);
         
-        this.resourceImpl = (ResourceManagementService) resourceImpl;        
+        this.resourceImpl = (ResourceManagementService) resourceImpl;
+        this.customerImpl = customerImpl;
         this.authenticator = authenticator;
         
         // Login
@@ -53,18 +53,17 @@ public class Manager implements Observer, FlightManagementService {
         Flight flight = new Flight(id, number, spaceship, time, location, destination, duration, numStops
                 , capacity, crewId, ticketPrice, passengerCount);
         
-        // Add flight to flights list
-        flights.put(id, flight);
+        // Add flight to flights list in CustomerImpl
+        customerImpl.getFlights(new AuthTokenTuple(myAuthToken)).put(id, flight);
         
         return flight;
-    }
+    }   
     
     @Override
     public LinkedHashMap<String, Flight> getFlights(AuthTokenTuple authTokenTuple) {
-        return flights;
+        
+        return customerImpl.getFlights(new AuthTokenTuple(myAuthToken));
     }
-    
-    
     
     @Override
     public void update(UpdateEvent event)
@@ -167,5 +166,5 @@ public class Manager implements Observer, FlightManagementService {
             
             // Define rescue flight to send
         }            
-    }   
+    }         
 }

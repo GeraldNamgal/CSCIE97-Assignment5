@@ -6,14 +6,12 @@ import com.cscie97.ists.authentication.AuthTokenTuple;
 import com.cscie97.ists.authentication.Credential;
 import com.cscie97.ists.authentication.StoreAuthenticationService;
 import com.cscie97.ists.manage.Flight;
-import com.cscie97.ists.manage.FlightManagementService;
 import com.cscie97.ists.resource.ResourceManagementService;
 
 
 public class CustomerImpl implements CustomerService {
 
-    String repositoryIpnsKeyName;
-    FlightManagementService manager;
+    String repositoryIpnsKeyName;    
     com.cscie97.ledger.CommandProcessor ledgerCp;
     ResourceManagementService resourceImpl;
     StoreAuthenticationService authenticator;
@@ -33,15 +31,15 @@ public class CustomerImpl implements CustomerService {
     LinkedHashMap<String, Note> feedback;
     LinkedHashMap<String, Music> music;
     LinkedHashMap<String, Book> books;
+    LinkedHashMap<String, Flight> flights;
         
     /* Constructor */
     
-    public CustomerImpl(FlightManagementService manager, com.cscie97.ledger.CommandProcessor ledgerCp, ResourceManagementService resourceImpl
+    public CustomerImpl(com.cscie97.ledger.CommandProcessor ledgerCp, ResourceManagementService resourceImpl
             , StoreAuthenticationService authenticator)
     {
         // TODO: ???
         
-        this.manager = manager;
         this.ledgerCp = ledgerCp;
         this.resourceImpl = resourceImpl;
         this.authenticator = authenticator;
@@ -88,7 +86,7 @@ public class CustomerImpl implements CustomerService {
     @Override
     public LinkedHashMap<String, Flight> getFlights(AuthTokenTuple authTokenTuple) {
         
-        return manager.getFlights(new AuthTokenTuple(null));
+        return flights;
     }
     
     @Override
