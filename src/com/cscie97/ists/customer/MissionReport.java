@@ -1,6 +1,4 @@
-package com.cscie97.ists.manage;
-
-import com.cscie97.ists.customer.ExperienceDocument;
+package com.cscie97.ists.customer;
 
 public class MissionReport extends ExperienceDocument {
 

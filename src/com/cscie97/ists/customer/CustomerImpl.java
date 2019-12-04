@@ -32,6 +32,8 @@ public class CustomerImpl implements CustomerService {
     LinkedHashMap<String, Music> music;
     LinkedHashMap<String, Book> books;
     LinkedHashMap<String, Flight> flights;
+    LinkedHashMap<String, MissionReport> missionReports;
+    LinkedHashMap<String, Discovery> discoveries;
         
     /* Constructor */
     
@@ -229,6 +231,8 @@ public class CustomerImpl implements CustomerService {
         
         Movie movie = null;
         
+        // Add to list
+        
         return movie;
     }
 
@@ -244,6 +248,8 @@ public class CustomerImpl implements CustomerService {
         
         AudioRecording audioRecording = null;
         
+        // Add to list
+        
         return audioRecording;
     }
 
@@ -256,6 +262,8 @@ public class CustomerImpl implements CustomerService {
     @Override
     public VideoRecording defineVideoRecording(String ipnsKeyName, String id, String name, String description,
             String source, AuthTokenTuple authTokenTuple) {
+        
+        // Add to list
         
         return null;
     }
@@ -303,6 +311,8 @@ public class CustomerImpl implements CustomerService {
     public Book defineBook(String ipnsKeyName, String id, String name, String description, String source,
             AuthTokenTuple authTokenTuple) {
 
+        // Add to list
+        
         return null;
     }
     
@@ -315,11 +325,43 @@ public class CustomerImpl implements CustomerService {
     public Music defineMusic(String ipnsKeyName, String id, String name, String description, String source,
             AuthTokenTuple authTokenTuple) {
 
+        // Add to list
+        
         return null;
     }   
 
     @Override
     public LinkedHashMap<String, Music> getMusic(AuthTokenTuple authTokenTuple) {
         return music;
+    }
+
+    @Override
+    public MissionReport defineMissionReport(String id, String name, String description,
+            AuthTokenTuple authTokenTuple) {
+
+        MissionReport missionReport = null;
+        
+        // Add to list
+        
+        return missionReport;
+    }
+
+    @Override
+    public LinkedHashMap<String, MissionReport> getMissionReports(AuthTokenTuple authTokenTuple) {
+        return missionReports;
+    }
+
+    @Override
+    public Discovery defineDiscovery(String id, String name, String description, String type,
+            AuthTokenTuple authTokenTuple) {
+        
+        Discovery discovery = null;
+        
+        return discovery;
+    }
+
+    @Override
+    public LinkedHashMap<String, Discovery> getDiscoveries(AuthTokenTuple authTokenTuple) {
+        return discoveries;
     }                        
 }

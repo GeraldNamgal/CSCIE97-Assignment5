@@ -41,4 +41,8 @@ public interface CustomerService {
     LinkedHashMap<String, Book> getBooks(AuthTokenTuple authTokenTuple); // Any user
     Music defineMusic(String ipnsKeyName, String id, String name, String description, String source, AuthTokenTuple authTokenTuple); // Any user
     LinkedHashMap<String, Music> getMusic(AuthTokenTuple authTokenTuple); // Any user
+    MissionReport defineMissionReport(String id, String name, String description, AuthTokenTuple authTokenTuple);
+    LinkedHashMap<String, MissionReport> getMissionReports(AuthTokenTuple authTokenTuple);    
+    Discovery defineDiscovery(String id, String name, String description, String type, AuthTokenTuple authTokenTuple);
+    LinkedHashMap<String, Discovery> getDiscoveries(AuthTokenTuple authTokenTuple);
 }
