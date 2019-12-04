@@ -86,6 +86,12 @@ public class CustomerImpl implements CustomerService {
     }
     
     @Override
+    public String getIpnsKeyName(AuthTokenTuple authTokenTuple) {
+        
+        return repositoryIpnsKeyName;
+    } 
+    
+    @Override
     public LinkedHashMap<String, Flight> getFlights(AuthTokenTuple authTokenTuple) {
         
         return flights;
@@ -363,5 +369,5 @@ public class CustomerImpl implements CustomerService {
     @Override
     public LinkedHashMap<String, Discovery> getDiscoveries(AuthTokenTuple authTokenTuple) {
         return discoveries;
-    }                        
+    }                          
 }

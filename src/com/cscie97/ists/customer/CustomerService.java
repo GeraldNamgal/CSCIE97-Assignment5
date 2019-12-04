@@ -9,6 +9,7 @@ public interface CustomerService {
 
     void pullFromIpfsRepo(String ipnsKeyName, AuthTokenTuple authTokenTuple); // Any user
     void pushToIpfsRepo(String ipnsKeyName, AuthTokenTuple authTokenTuple); // Any user
+    String getIpnsKeyName(AuthTokenTuple authTokenTuple);
     LinkedHashMap<String, Flight> getFlights(AuthTokenTuple authTokenTuple);
     Passenger registerPassenger(String id, String name, String account, String email, AuthTokenTuple authTokenTuple); // Public    
     LinkedHashMap<String, Passenger> getPassengers(AuthTokenTuple authTokenTuple); // User-specific   

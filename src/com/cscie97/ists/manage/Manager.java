@@ -102,6 +102,15 @@ public class Manager implements Observer, FlightManagementService {
             emergency.execute();
         }
         
+        if (eventString.equals("reached destination"))
+        {        
+            // Create new Emergency               
+            Command reachedDestination = new ReachedDestinationCommand(event.getSourceDevice());            
+            
+            // Run the Command's execute method
+            reachedDestination.execute();
+        }
+        
         if (eventString.equals("Test ing"))
         {
             Command testCommand = new TestCommand(event.getSourceDevice());
@@ -152,7 +161,7 @@ public class Manager implements Observer, FlightManagementService {
     {      
         /* Variables */        
         
-        String type;
+        String emergencyType;
         
         public EmergencyCommand(Spaceship sourceDevice)
         {
@@ -165,6 +174,28 @@ public class Manager implements Observer, FlightManagementService {
             String coordinates = sourceDevice.coordinates;
             
             // Define rescue flight to send
+            resourceImpl.defineSpaceship(null, null, null, null, null, null, null, null, null, null);
+            Flight flight = defineFlight(null, null, null, null, null, null, null, null, null, null, null, null);
         }            
-    }         
+    }
+    
+    public class ReachedDestinationCommand extends Command
+    {      
+        /* Variables */
+        
+        
+        
+        public ReachedDestinationCommand(Spaceship sourceDevice)
+        {
+            super(sourceDevice);            
+        }
+
+        public void execute()
+        {
+            // TODO
+            
+            customerImpl.pullFromIpfsRepo(customerImpl.getIpnsKeyName(new AuthTokenTuple(myAuthToken)), new AuthTokenTuple(myAuthToken));
+            customerImpl.pushToIpfsRepo(customerImpl.getIpnsKeyName(new AuthTokenTuple(myAuthToken)), new AuthTokenTuple(myAuthToken));
+        }            
+    }
 }
