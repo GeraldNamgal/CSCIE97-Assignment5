@@ -1,6 +1,4 @@
-package com.cscie97.ists.ipfs;
-
-import com.cscie97.ists.customer.Book;
+package com.cscie97.ists.customer;
 
 public class ObjectFactory {
 

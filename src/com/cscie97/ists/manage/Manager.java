@@ -33,8 +33,8 @@ public class Manager implements Observer, FlightManagementService {
         this.resourceImpl = (ResourceManagementService) resourceImpl;        
         this.authenticator = authenticator;
         
-        // TODO: Can skip for design doc -- Login Manager
-        //myAuthToken = authenticator.login("controller-pwd", "password");
+        // Login
+        myAuthToken = null;
     }
     
     @Override
@@ -42,7 +42,7 @@ public class Manager implements Observer, FlightManagementService {
             , Integer capacity, String crewId, Integer ticketPrice, Integer passengerCount, AuthTokenTuple authTokenTuple)
     {
         // Find available spaceships
-        resourceImpl.getSpaceships(null);
+        resourceImpl.getSpaceships(new AuthTokenTuple(myAuthToken));
         
         // If no available spaceships, create one
         Spaceship spaceship = null;

@@ -64,7 +64,8 @@ public class CustomerImpl implements CustomerService {
     
     public Object jsonToObject(String json)
     {
-        return null;
+        // Returns an Object from a json
+        return ObjectFactory.getObject("");
     }
     
     /* API Methods */
