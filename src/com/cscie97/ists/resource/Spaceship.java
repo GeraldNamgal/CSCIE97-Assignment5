@@ -132,4 +132,44 @@ public class Spaceship {
     {
         fuelLevel = fuelLevel - amount;
     }
+
+    public Integer getFuelLevel(AuthTokenTuple authTokenTuple) {
+        return fuelLevel;
+    }
+
+    public void setFuelLevel(Integer fuelLevel, AuthTokenTuple authTokenTuple) {
+        this.fuelLevel = fuelLevel;
+    }
+
+    public Integer getCurrentSpeed(AuthTokenTuple authTokenTuple) {
+        return currentSpeed;
+    }
+
+    public void setCurrentSpeed(Integer currentSpeed, AuthTokenTuple authTokenTuple) {
+        this.currentSpeed = currentSpeed;
+    }
+
+    public String getTrajectory(AuthTokenTuple authTokenTuple) {
+        return trajectory;
+    }
+
+    public void setTrajectory(String trajectory, AuthTokenTuple authTokenTuple) {
+        this.trajectory = trajectory;
+    }
+
+    public String getCoordinates(AuthTokenTuple authTokenTuple) {
+        return coordinates;
+    }
+
+    public void setCoordinates(String coordinates, AuthTokenTuple authTokenTuple) {
+        this.coordinates = coordinates;
+    }
+
+    public String getStatus(AuthTokenTuple authTokenTuple) {
+        return status;
+    }
+
+    public void setStatus(String status, AuthTokenTuple authTokenTuple) {
+        this.status = status;
+    }  
 }
