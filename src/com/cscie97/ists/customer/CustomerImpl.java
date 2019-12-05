@@ -5,7 +5,6 @@ import java.util.LinkedHashMap;
 import com.cscie97.ists.authentication.AuthTokenTuple;
 import com.cscie97.ists.authentication.Credential;
 import com.cscie97.ists.authentication.StoreAuthenticationService;
-import com.cscie97.ists.manage.Flight;
 import com.cscie97.ists.resource.ResourceManagementService;
 
 

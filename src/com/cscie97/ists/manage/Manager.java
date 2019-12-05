@@ -2,6 +2,7 @@ package com.cscie97.ists.manage;
 
 import com.cscie97.ists.authentication.StoreAuthenticationService;
 import com.cscie97.ists.customer.CustomerService;
+import com.cscie97.ists.customer.Flight;
 import com.cscie97.ists.resource.Observer;
 import com.cscie97.ists.resource.ResourceManagementService;
 import com.cscie97.ists.resource.Spaceship;
@@ -57,13 +58,7 @@ public class Manager implements Observer, FlightManagementService {
         customerImpl.getFlights(new AuthTokenTuple(myAuthToken)).put(id, flight);
         
         return flight;
-    }   
-    
-    @Override
-    public LinkedHashMap<String, Flight> getFlights(AuthTokenTuple authTokenTuple) {
-        
-        return customerImpl.getFlights(new AuthTokenTuple(myAuthToken));
-    }
+    }      
     
     @Override
     public void update(UpdateEvent event)

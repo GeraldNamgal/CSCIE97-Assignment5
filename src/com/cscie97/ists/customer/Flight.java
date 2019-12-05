@@ -1,4 +1,4 @@
-package com.cscie97.ists.manage;
+package com.cscie97.ists.customer;
 
 import com.cscie97.ists.authentication.AuthTokenTuple;
 import com.cscie97.ists.resource.Spaceship;
