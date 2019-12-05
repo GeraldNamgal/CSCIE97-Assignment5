@@ -1,11 +1,15 @@
 package com.cscie97.ists.cp;
 
+import java.util.LinkedHashMap;
+import java.util.Map.Entry;
+
 import com.cscie97.ists.authentication.AuthToken;
 import com.cscie97.ists.authentication.AuthTokenTuple;
 import com.cscie97.ists.authentication.Authenticator;
 import com.cscie97.ists.authentication.StoreAuthenticationService;
 import com.cscie97.ists.customer.CustomerImpl;
 import com.cscie97.ists.customer.CustomerService;
+import com.cscie97.ists.customer.Flight;
 import com.cscie97.ists.manage.FlightManagementService;
 import com.cscie97.ists.manage.Manager;
 import com.cscie97.ists.resource.ResourceImpl;
@@ -68,6 +72,28 @@ public class CommandProcessor
         
         String spaceshipId = null;
         resourceImpl.createEvent(spaceshipId, "Test ing", new AuthTokenTuple(hardcodedUserAuthToken));
+        
+        /* TODO: Provisioning a new flight (sequence diagram) */
+        
+        // Check that existing flights don't conflict with the spaceship you want to use, the crew, 
+        
+        /* TODO: Booking a new flight (sequence diagram) */
+        
+        // Get flights
+        LinkedHashMap<String, Flight> flights = customerImpl.getFlights(new AuthTokenTuple(hardcodedUserAuthToken));
+        
+        // Print flights to the screen
+        Flight flight;
+        for (Entry<String, Flight> flightEntry : flights.entrySet())
+        {
+            flight = flightEntry.getValue();
+            System.out.println(flight.id);
+            System.out.println(flight.number);
+            // ...
+        }
+        
+        // On Select Flight event, bo
+        
     } 
     
     public void parseAndProcess(String input)

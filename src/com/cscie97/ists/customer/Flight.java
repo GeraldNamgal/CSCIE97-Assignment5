@@ -5,18 +5,18 @@ import com.cscie97.ists.resource.Spaceship;
 
 public class Flight {
 
-    String id;
-    String number;
-    Spaceship spaceship;
-    String time;
-    String location;
-    String destination;
-    String duration;
-    Integer numStops;
-    Integer capacity;
-    String crewId;
-    Integer ticketPrice;
-    Integer passengerCount = 0;
+    public String id;
+    public String number;
+    public Spaceship spaceship;
+    public String time;
+    public String location;
+    public String destination;
+    public String duration;
+    public Integer numStops;
+    public Integer capacity;
+    public String crewId;
+    public Integer ticketPrice;
+    public Integer passengerCount = 0;
     
     public Flight(String id, String number, Spaceship spaceship, String time, String location, String destination, String duration, Integer numStops
             , Integer capacity, String crewId, Integer ticketPrice, Integer passengerCount)
