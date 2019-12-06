@@ -20,10 +20,10 @@ public class Spaceship {
     public String description;
     public Integer currentSpeed = 0;
     public String trajectory;
-    public String coordinates;
-    public String status;
+    public String coordinates;    
     public Integer crewCapacity;
     public ArrayList<String> passengerIds;
+    public String currentFlightId;
         
         
         
@@ -48,8 +48,7 @@ public class Spaceship {
         this.fuelType = fuelType;
         this.type = "cargo";
         this.fuelCapacity = fuelCapacity;
-        this.description = description;
-        this.status = "available";
+        this.description = description;        
        
         cargoShip = new CargoShip(cargoType);            
     }
@@ -65,8 +64,7 @@ public class Spaceship {
         this.fuelType = fuelType;
         this.type = "passenger";
         this.fuelCapacity = fuelCapacity;
-        this.description = description;
-        this.status = "available";
+        this.description = description;       
         
         passengerShip = new PassengerShip(capacity, classType);
     }
@@ -82,8 +80,7 @@ public class Spaceship {
         this.fuelType = fuelType;
         this.type = "rescue";
         this.fuelCapacity = fuelCapacity;
-        this.description = description;
-        this.status = "available";
+        this.description = description;       
         
         rescueShip = new RescueShip(capacity);
     }
@@ -168,11 +165,17 @@ public class Spaceship {
         this.coordinates = coordinates;
     }
 
-    public String getStatus(AuthTokenTuple authTokenTuple) {
-        return status;
+
+
+    public String getCurrentFlightId() {
+        return currentFlightId;
     }
 
-    public void setStatus(String status, AuthTokenTuple authTokenTuple) {
-        this.status = status;
-    }  
+
+
+    public void setCurrentFlightId(String currentFlightId) {
+        this.currentFlightId = currentFlightId;
+    }
+    
+    
 }

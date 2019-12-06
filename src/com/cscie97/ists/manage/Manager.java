@@ -95,7 +95,7 @@ public class Manager implements Observer, FlightManagementService {
         if (eventString.equals("status update"))
         {        
             // Create new Emergency               
-            Command statusUpdate = new StatusUpdateCommand(event.getSourceDevice());            
+            Command statusUpdate = new StatusUpdateCommand(event.getSourceDevice(), "status string");            
             
             // Run the Command's execute method
             statusUpdate.execute();
@@ -151,17 +151,28 @@ public class Manager implements Observer, FlightManagementService {
         
         String status;
         
-        public StatusUpdateCommand(Spaceship sourceDevice)
+        public StatusUpdateCommand(Spaceship sourceDevice, String status)
         {
-            super(sourceDevice);            
+            super(sourceDevice);
+            
+            this.status = status;
         }
 
         public void execute()
         {
-            // Change the ship's status
-            sourceDevice.status = status;
+            // Change the flight's status
+            
+            String currentFlightId = sourceDevice.getCurrentFlightId();
+            LinkedHashMap<String, Flight> flights = customerImpl.getFlights(null);
+            Flight flight = flights.get(currentFlightId);
+            flight.setStatus(status);
             
             // TODO: If status update was "Reached destination" then also do ReachedDestinationCommand
+            
+            if (status.equals("reached destination"))
+            {
+                
+            }
         }            
     }
     

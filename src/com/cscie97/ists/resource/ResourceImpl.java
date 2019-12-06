@@ -61,15 +61,11 @@ public class ResourceImpl implements ResourceManagementService, Subject, Visitab
         /*// Check that given AuthToken has permission to access this method
         GetPermissionsVisitor getPermissionsVisitor = authenticator.getUserPermissions(authTokenTuple.getAuthToken());
         if ((getPermissionsVisitor == null) || !getPermissionsVisitor.hasPermission(authTokenTuple.getPermissionTuple().setPermissionId("use Modeler API")))        
-            return;
+            return;*/
         
         Spaceship sourceDevice = spaceships.get(spaceshipId);
         
-        // Send simulated event to device's event method       
-        String[] eventToSend = sourceDevice.event(simulatedEvent);*/
-        
-        Spaceship sourceDevice = null;
-        String[] eventToSend = simulatedEvent.split("\\s+");
+        String[] eventToSend = communicationSystem.createEvent(sourceDevice, simulatedEvent);
         
         // Notify observers of the event sent back from device
         notifyObservers(sourceDevice, eventToSend);   

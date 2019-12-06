@@ -18,6 +18,7 @@ public class Flight {
     public Team crewId;
     public Integer ticketPrice;
     public Integer passengerCount = 0;
+    public String status;
     
     public Flight(String id, String number, Spaceship spaceship, String time, String location, String destination, String duration, Integer numStops
             , Integer capacity, Team crewId, Integer ticketPrice, Integer passengerCount)
@@ -42,4 +43,12 @@ public class Flight {
     {
         // Update count
     }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }   
 }

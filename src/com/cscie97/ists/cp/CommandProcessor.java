@@ -12,8 +12,10 @@ import com.cscie97.ists.customer.CustomerService;
 import com.cscie97.ists.customer.Flight;
 import com.cscie97.ists.manage.FlightManagementService;
 import com.cscie97.ists.manage.Manager;
+import com.cscie97.ists.resource.CommunicationSystem;
 import com.cscie97.ists.resource.ResourceImpl;
 import com.cscie97.ists.resource.ResourceManagementService;
+import com.cscie97.ists.resource.Spaceship;
 import com.cscie97.ists.resource.Subject;
 
 public class CommandProcessor
@@ -69,16 +71,15 @@ public class CommandProcessor
         parseAndProcess("process-transaction 8 amount 2000 fee 10 payload \"fund account\" payer master receiver art");
         
         resourceImpl.getBudget(new AuthTokenTuple(hardcodedUserAuthToken));
-        
-        String spaceshipId = null;
-        resourceImpl.createEvent(spaceshipId, "Test ing", new AuthTokenTuple(hardcodedUserAuthToken));
-        
-        /* TODO: Provisioning a new flight (sequence diagram) */
-        
-        // Check that existing flights don't conflict with the spaceship you want to use, the crew?
+                
+        /* TODO: Provisioning a new flight (sequence diagram) */        
         
         Flight flight1 = manager.defineFlight("id", "number", "spaceshipId", "time", "location", "destination", "duration", 2, 30, "crewId", 350, 21, null);
         
+        /* TODO: Status */
+        
+        String spaceshipId = null;      
+        resourceImpl.createEvent(spaceshipId, "status update reached destination", null);
         
         /* TODO: Booking a new flight (sequence diagram) */
         
