@@ -67,7 +67,8 @@ public class Manager implements Observer, FlightManagementService {
                 , capacity, team, ticketPrice, passengerCount);
         
         // Add flight to flights list in CustomerImpl
-        customerImpl.getFlights(new AuthTokenTuple(myAuthToken)).put(id, flight);
+        LinkedHashMap<String, Flight> flights = customerImpl.getFlights(new AuthTokenTuple(myAuthToken));
+        flights.put(id, flight);
         
         return flight;
     }      
