@@ -3,10 +3,12 @@ package com.cscie97.ists.manage;
 import com.cscie97.ists.authentication.StoreAuthenticationService;
 import com.cscie97.ists.customer.CustomerService;
 import com.cscie97.ists.customer.Flight;
+import com.cscie97.ists.resource.Entity;
 import com.cscie97.ists.resource.Observer;
 import com.cscie97.ists.resource.ResourceManagementService;
 import com.cscie97.ists.resource.Spaceship;
 import com.cscie97.ists.resource.Subject;
+import com.cscie97.ists.resource.Team;
 import com.cscie97.ists.resource.UpdateEvent;
 import com.cscie97.ists.manage.Command;
 
@@ -39,20 +41,30 @@ public class Manager implements Observer, FlightManagementService {
     }
     
     @Override
-    public Flight defineFlight(String id, String number, String time, String location, String destination, String duration, Integer numStops
+    public Flight defineFlight(String id, String number, String spaceshipId, String time, String location, String destination, String duration, Integer numStops
             , Integer capacity, String crewId, Integer ticketPrice, Integer passengerCount, AuthTokenTuple authTokenTuple)
-    {
-        // Find available spaceships
-        resourceImpl.getSpaceships(new AuthTokenTuple(myAuthToken));
+    {        
+        // Get spaceship
+        LinkedHashMap<String, Spaceship> spaceships = resourceImpl.getSpaceships(new AuthTokenTuple(myAuthToken));
+        Spaceship spaceship = spaceships.get(spaceshipId);
         
-        // If no available spaceships, create one
-        Spaceship spaceship = null;
+        // TODO: Check that spaceship isn't scheduled at the time requested?
+        // for each flight
+        //      if (time + duration overlaps flight.time + flight.duration) && (spaceship == flight.getSpaceship)
+        //              throw new Exception
+                        
+        // Get team
+        LinkedHashMap<String, Entity> entities = resourceImpl.getEntities(new AuthTokenTuple(myAuthToken));
+        Team team = (Team) entities.get(crewId);
         
-        // Check flights list for availabilities for booking
-        
+        // TODO: Check that crew isn't scheduled at the time requested?
+        // for each flight
+        //      if (time + duration overlaps flight.time + flight.duration) && (spaceship == flight.getSpaceship)
+        //              throw new Exception
+                
         // Create new flight
         Flight flight = new Flight(id, number, spaceship, time, location, destination, duration, numStops
-                , capacity, crewId, ticketPrice, passengerCount);
+                , capacity, team, ticketPrice, passengerCount);
         
         // Add flight to flights list in CustomerImpl
         customerImpl.getFlights(new AuthTokenTuple(myAuthToken)).put(id, flight);
@@ -170,7 +182,7 @@ public class Manager implements Observer, FlightManagementService {
             
             // Define rescue flight to send
             resourceImpl.defineSpaceship(null, null, null, null, null, null, null, null, null, null);
-            Flight flight = defineFlight(null, null, null, null, null, null, null, null, null, null, null, null);
+            Flight flight = defineFlight(null, null, null, null, null, null, null, null, null, null, null, null, null);
         }            
     }
     

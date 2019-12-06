@@ -2,6 +2,7 @@ package com.cscie97.ists.customer;
 
 import com.cscie97.ists.authentication.AuthTokenTuple;
 import com.cscie97.ists.resource.Spaceship;
+import com.cscie97.ists.resource.Team;
 
 public class Flight {
 
@@ -14,12 +15,12 @@ public class Flight {
     public String duration;
     public Integer numStops;
     public Integer capacity;
-    public String crewId;
+    public Team crewId;
     public Integer ticketPrice;
     public Integer passengerCount = 0;
     
     public Flight(String id, String number, Spaceship spaceship, String time, String location, String destination, String duration, Integer numStops
-            , Integer capacity, String crewId, Integer ticketPrice, Integer passengerCount)
+            , Integer capacity, Team crewId, Integer ticketPrice, Integer passengerCount)
     {
         this.id = id;
         this.number = number;

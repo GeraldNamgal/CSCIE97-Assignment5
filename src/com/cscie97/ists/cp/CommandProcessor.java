@@ -75,7 +75,10 @@ public class CommandProcessor
         
         /* TODO: Provisioning a new flight (sequence diagram) */
         
-        // Check that existing flights don't conflict with the spaceship you want to use, the crew, 
+        // Check that existing flights don't conflict with the spaceship you want to use, the crew?
+        
+        Flight flight1 = manager.defineFlight("id", "number", "spaceshipId", "time", "location", "destination", "duration", 2, 30, "crewId", 350, 21, null);
+        
         
         /* TODO: Booking a new flight (sequence diagram) */
         
