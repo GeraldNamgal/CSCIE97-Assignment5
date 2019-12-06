@@ -108,16 +108,7 @@ public class Manager implements Observer, FlightManagementService {
             
             // Run the Command's execute method
             emergency.execute();
-        }
-        
-        if (eventString.equals("reached destination"))
-        {        
-            // Create new Emergency               
-            Command reachedDestination = new ReachedDestinationCommand(event.getSourceDevice());            
-            
-            // Run the Command's execute method
-            reachedDestination.execute();
-        }
+        }        
         
         if (eventString.equals("Test ing"))
         {
@@ -160,19 +151,67 @@ public class Manager implements Observer, FlightManagementService {
 
         public void execute()
         {
-            // Change the flight's status
-            
+            // Change the flight's status            
             String currentFlightId = sourceDevice.getCurrentFlightId();
             LinkedHashMap<String, Flight> flights = customerImpl.getFlights(null);
             Flight flight = flights.get(currentFlightId);
             flight.setStatus(status);
             
-            // TODO: If status update was "Reached destination" then also do ReachedDestinationCommand
-            
+            // If status update was "Reached destination" then also do ReachedDestinationCommand            
             if (status.equals("reached destination"))
-            {
+            {             
+                Command reachedDestination = new ReachedDestinationCommand(sourceDevice);            
                 
+                // Run the Command's execute method
+                reachedDestination.execute();
             }
+        }            
+    }
+    
+    public class ReachedDestinationCommand extends Command
+    {      
+        /* Variables */
+        
+        
+        
+        public ReachedDestinationCommand(Spaceship sourceDevice)
+        {
+            super(sourceDevice);            
+        }
+
+        public void execute()
+        {
+            // TODO
+            
+            // Call Location Update command
+            LocationUpdateCommand locationUpdate = new LocationUpdateCommand(sourceDevice, 0, "trajectory", "destinationCoordinates");
+            locationUpdate.execute();
+            
+            // Push to IPFS
+            String ipnsKeyName = customerImpl.getIpnsKeyName(new AuthTokenTuple(myAuthToken));
+            customerImpl.pullFromIpfsRepo(new AuthTokenTuple(myAuthToken));
+            customerImpl.pushToIpfsRepo(new AuthTokenTuple(myAuthToken));
+        }            
+    }
+    
+    public class LocationUpdateCommand extends Command
+    {      
+        /* Variables */        
+        
+        Integer speed;
+        String trajectory;
+        String coordinates;
+        
+        public LocationUpdateCommand(Spaceship sourceDevice, Integer speed, String trajectory, String coordinates)
+        {
+            super(sourceDevice);            
+        }
+
+        public void execute()
+        {
+            sourceDevice.setCurrentSpeed(speed, new AuthTokenTuple(myAuthToken));
+            sourceDevice.setTrajectory(trajectory, new AuthTokenTuple(myAuthToken));
+            sourceDevice.setCoordinates(coordinates, new AuthTokenTuple(myAuthToken));
         }            
     }
     
@@ -198,23 +237,5 @@ public class Manager implements Observer, FlightManagementService {
         }            
     }
     
-    public class ReachedDestinationCommand extends Command
-    {      
-        /* Variables */
-        
-        
-        
-        public ReachedDestinationCommand(Spaceship sourceDevice)
-        {
-            super(sourceDevice);            
-        }
-
-        public void execute()
-        {
-            // TODO
-            
-            customerImpl.pullFromIpfsRepo(customerImpl.getIpnsKeyName(new AuthTokenTuple(myAuthToken)), new AuthTokenTuple(myAuthToken));
-            customerImpl.pushToIpfsRepo(customerImpl.getIpnsKeyName(new AuthTokenTuple(myAuthToken)), new AuthTokenTuple(myAuthToken));
-        }            
-    }
+    
 }

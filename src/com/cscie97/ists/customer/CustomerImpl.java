@@ -70,18 +70,22 @@ public class CustomerImpl implements CustomerService {
     /* API Methods */
     
     @Override
-    public void pullFromIpfsRepo(String ipnsKeyName, AuthTokenTuple authTokenTuple) {
+    public void pullFromIpfsRepo(AuthTokenTuple authTokenTuple) {
         
         // Downloads customer service data from the remote Ipfs repo to merge its state with customer service data workspace in
         // local memory; merge conflicts are handled...; database can be a json text file...; populates list of passengers, points
         // of interest, etc.; ...?
+        
+        
     }
 
     @Override
-    public void pushToIpfsRepo(String ipnsKeyName, AuthTokenTuple authTokenTuple) {
+    public void pushToIpfsRepo(AuthTokenTuple authTokenTuple) {
         
         // Uploads and merges local customer service data (including updates) to the central remote Ipfs repo; merge conflicts
         // are handled...; database can be a json text file...; ...?
+        
+        
     }
     
     @Override
