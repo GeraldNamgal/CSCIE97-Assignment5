@@ -44,11 +44,11 @@ public class Flight {
         // Update count
     }
 
-    public String getStatus() {
+    public String getStatus(AuthTokenTuple authTokenTuple) {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(String status, AuthTokenTuple authTokenTuple) {
         this.status = status;
     }   
 }

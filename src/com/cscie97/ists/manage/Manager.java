@@ -155,7 +155,7 @@ public class Manager implements Observer, FlightManagementService {
             String currentFlightId = sourceDevice.getCurrentFlightId();
             LinkedHashMap<String, Flight> flights = customerImpl.getFlights(null);
             Flight flight = flights.get(currentFlightId);
-            flight.setStatus(status);
+            flight.setStatus(status, new AuthTokenTuple(myAuthToken));
             
             // If status update was "Reached destination" then also do ReachedDestinationCommand            
             if (status.equals("reached destination"))
