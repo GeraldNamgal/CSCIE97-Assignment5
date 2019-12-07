@@ -188,7 +188,6 @@ public class Manager implements Observer, FlightManagementService {
             locationUpdate.execute();
             
             // Push to IPFS
-            String ipnsKeyName = customerImpl.getIpnsKeyName(new AuthTokenTuple(myAuthToken));
             customerImpl.pullFromIpfsRepo(new AuthTokenTuple(myAuthToken));
             customerImpl.pushToIpfsRepo(new AuthTokenTuple(myAuthToken));
         }            
