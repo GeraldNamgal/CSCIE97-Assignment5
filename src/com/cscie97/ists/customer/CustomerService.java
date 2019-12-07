@@ -23,7 +23,7 @@ public interface CustomerService {
             , String departureTime, String returnTime, AuthTokenTuple authTokenTuple); // Any user    
     LinkedHashMap<String, FlightBooking> getFlightBookings(AuthTokenTuple authTokenTuple); // Admin only    
     TravelDocument defineTravelDoc(String id, String flightNumber, String ticketId, String passengerName, String destination, String dateTime, Integer price
-            , String boardPassIpnsKeyName, String passportId, String visaId, AuthTokenTuple authTokenTuple); // Admin only but user needs to add passport and visa (through getTravelDocs addPassport?)
+            , String boardPassIpnsKeyName, String passportId, String visaId, String welcomePackage, AuthTokenTuple authTokenTuple); // Admin only but user needs to add passport and visa (through getTravelDocs addPassport?)
     LinkedHashMap<String, TravelDocument> getTravelDocs(AuthTokenTuple authTokenTuple); // User-specific
     WelcomePackage defineWelcomePackage(String id, String name, String description, AuthTokenTuple authTokenTuple); // Admin only
     LinkedHashMap<String, WelcomePackage> getWelcomePackages(AuthTokenTuple authTokenTuple); // Any user but only admin can modify/mutate; others can only get    

@@ -189,9 +189,27 @@ public class CustomerImpl implements CustomerService {
     public FlightBooking bookFlight(String id, String flightNumber, String destination, String passengerId, Integer price, String type
             , String departureTime, String returnTime, AuthTokenTuple authTokenTuple)
     {
-        FlightBooking flightBooking = null;
+        // Get Passenger
+        Passenger passenger = passengers.get(passengerId);
+        
+        // Create flight transaction
+        String txnId = ledgerCp.processTransaction("txnId", price, 10, "description", passenger.getAccount(), "ists account");       
+        
+        // Book flight
+        FlightBooking flightBooking = new FlightBooking(id, flightNumber, destination, passenger, price, type, departureTime, returnTime);
         
         // Add to list of flightBookings
+        flightBookings.put(id, flightBooking);
+        
+        // Get WelcomePackage
+        WelcomePackage welcomePackage = welcomePackages.get(null);
+        
+        // Create Travel Doc
+        TravelDocument travelDoc = new TravelDocument( "travelDocId",  "flightNumber",  "ticketId",  "passengerName",  "destination",  "dateTime",  price
+                ,  "boardPassIpnsKeyName",  "passportId",  "visaId", welcomePackage);        
+        
+        // Add travel doc to list
+        travelDocuments.put("travelDocId", travelDoc);
         
         return flightBooking;
     }
@@ -204,13 +222,12 @@ public class CustomerImpl implements CustomerService {
     
     @Override
     public TravelDocument defineTravelDoc(String id, String flightNumber, String ticketId, String passengerName, String destination, String dateTime, Integer price
-            , String boardPassIpnsKeyName, String passportId, String visaId, AuthTokenTuple authTokenTuple) {
+            , String boardPassIpnsKeyName, String passportId, String visaId, String welcomePackageId, AuthTokenTuple authTokenTuple) {
         
-        TravelDocument travelDocument = null;
+        // Get WelcomePackage
+        WelcomePackage welcomePackage = null;        
         
-        // Add to list of travelDocuments
-        
-        return travelDocument;
+        return null;
     }
     
     @Override

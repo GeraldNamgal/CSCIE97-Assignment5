@@ -9,7 +9,7 @@ public class TravelDocument {
     public LinkedHashMap<String, WelcomePackage> welcomePackages;
 
     public TravelDocument(String id, String flightNumber, String ticketId, String passengerName, String destination, String dateTime, Integer price
-            , String boardPassIpnsKeyName, String passportId, String visaId)
+            , String boardPassIpnsKeyName, String passportId, String visaId, WelcomePackage welcomePackage)
     {
         
     }

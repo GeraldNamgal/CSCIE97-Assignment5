@@ -19,4 +19,9 @@ public class Passenger {
         this.account = account;
         this.email = email;
     }
+    
+    public String getAccount()
+    {
+        return account;
+    }
 }
