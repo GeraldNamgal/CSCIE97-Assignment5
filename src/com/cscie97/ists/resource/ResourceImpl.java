@@ -227,13 +227,12 @@ public class ResourceImpl implements ResourceManagementService, Subject, Visitab
         return computerSystem;
     }
 
-
-
     @Override
     public LinkedHashMap<String, Integer> getResourcePrices(AuthTokenTuple authTokenTuple) {
         return prices;
     }
 
+    
     
 
     @Override
@@ -243,7 +242,7 @@ public class ResourceImpl implements ResourceManagementService, Subject, Visitab
     }
 
     @Override
-    public EntitiesVisitor visitEntities() {
+    public EntitiesVisitor getEntitiesVisitor(AuthTokenTuple authTokenTuple) {
         
         EntitiesVisitor entitiesVisitor = null;
         this.acceptVisitor(entitiesVisitor);
