@@ -190,10 +190,7 @@ public class CustomerImpl implements CustomerService {
             , String departureTime, String returnTime, AuthTokenTuple authTokenTuple)
     {
         // Get flight 
-        Flight flight = flights.get(flightId);
-        
-        // Increase flight's passenger count
-        flight.updatePassengerCount(1, authTokenTuple);
+        Flight flight = flights.get(flightId);       
         
         // Get Passenger
         Passenger passenger = passengers.get(passengerId);
@@ -202,16 +199,16 @@ public class CustomerImpl implements CustomerService {
         FlightBooking flightBooking = new FlightBooking(id, flight, destination, passenger, price, type, departureTime, returnTime);
         
         // Add to list of flightBookings
-        flightBookings.put(id, flightBooking);
+        flightBookings.put(id, flightBooking);   
         
         // Create flight transaction
-        String txnId = ledgerCp.processTransaction("txnId", price, 10, "description", passenger.getAccount(), "ists account");
+        String txnId = ledgerCp.processTransaction("txnId", price, 10, "description", passenger.getAccount(), "ists account");        
         
         // Get WelcomePackage
         WelcomePackage welcomePackage = welcomePackages.get(null);
         
         // Create Travel Doc
-        TravelDocument travelDoc = new TravelDocument( "travelDocId",  "flightNumber",  "ticketId",  "passengerName",  "destination",  "dateTime",  price
+        TravelDocument travelDoc = new TravelDocument( "travelDocId",  flightId,  "ticketId",  "passengerName",  "destination",  "dateTime",  price
                 ,  "boardPassIpnsKeyName",  "passportId",  "visaId", welcomePackage);        
         
         // Add travel doc to list
