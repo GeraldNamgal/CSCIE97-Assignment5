@@ -186,20 +186,26 @@ public class CustomerImpl implements CustomerService {
     }
     
     @Override
-    public FlightBooking bookFlight(String id, String flightNumber, String destination, String passengerId, Integer price, String type
+    public FlightBooking bookFlight(String id, String flightId, String destination, String passengerId, Integer price, String type
             , String departureTime, String returnTime, AuthTokenTuple authTokenTuple)
     {
+        // Get flight 
+        Flight flight = flights.get(flightId);
+        
+        // Increase flight's passenger count
+        flight.updatePassengerCount(1, authTokenTuple);
+        
         // Get Passenger
         Passenger passenger = passengers.get(passengerId);
         
-        // Create flight transaction
-        String txnId = ledgerCp.processTransaction("txnId", price, 10, "description", passenger.getAccount(), "ists account");       
-        
         // Book flight
-        FlightBooking flightBooking = new FlightBooking(id, flightNumber, destination, passenger, price, type, departureTime, returnTime);
+        FlightBooking flightBooking = new FlightBooking(id, flight, destination, passenger, price, type, departureTime, returnTime);
         
         // Add to list of flightBookings
         flightBookings.put(id, flightBooking);
+        
+        // Create flight transaction
+        String txnId = ledgerCp.processTransaction("txnId", price, 10, "description", passenger.getAccount(), "ists account");
         
         // Get WelcomePackage
         WelcomePackage welcomePackage = welcomePackages.get(null);
