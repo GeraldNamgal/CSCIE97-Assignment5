@@ -10,7 +10,7 @@ import com.cscie97.ists.resource.Spaceship;
 import com.cscie97.ists.resource.Subject;
 import com.cscie97.ists.resource.Team;
 import com.cscie97.ists.resource.UpdateEvent;
-import com.cscie97.ists.manage.Command;
+import com.cscie97.ists.manage.Action;
 
 import java.util.LinkedHashMap;
 
@@ -95,7 +95,7 @@ public class Manager implements Observer, FlightManagementService {
         if (eventString.equals("status update"))
         {        
             // Create new Emergency               
-            Command statusUpdate = new StatusUpdateCommand(event.getSourceDevice(), "status string");            
+            Action statusUpdate = new StatusUpdateCommand(event.getSourceDevice(), "status string");            
             
             // Run the Command's execute method
             statusUpdate.execute();
@@ -104,7 +104,7 @@ public class Manager implements Observer, FlightManagementService {
         if (eventString.equals("emergency"))
         {        
             // Create new Emergency               
-            Command emergency = new EmergencyCommand(event.getSourceDevice());            
+            Action emergency = new EmergencyCommand(event.getSourceDevice());            
             
             // Run the Command's execute method
             emergency.execute();
@@ -112,14 +112,14 @@ public class Manager implements Observer, FlightManagementService {
         
         if (eventString.equals("Test ing"))
         {
-            Command testCommand = new TestCommand(event.getSourceDevice());
+            Action testCommand = new TestCommand(event.getSourceDevice());
             testCommand.execute();
         }
     }
     
     /* Nested classes */
     
-    public class TestCommand extends Command
+    public class TestCommand extends Action
     {      
         /* Variables */        
         
@@ -136,7 +136,7 @@ public class Manager implements Observer, FlightManagementService {
         }            
     }
     
-    public class StatusUpdateCommand extends Command
+    public class StatusUpdateCommand extends Action
     {      
         /* Variables */
         
@@ -160,7 +160,7 @@ public class Manager implements Observer, FlightManagementService {
             // If status update was "Reached destination" then also do ReachedDestinationCommand            
             if (status.equals("reached destination"))
             {             
-                Command reachedDestination = new ReachedDestinationCommand(sourceDevice);            
+                Action reachedDestination = new ReachedDestinationCommand(sourceDevice);            
                 
                 // Run the Command's execute method
                 reachedDestination.execute();
@@ -168,7 +168,7 @@ public class Manager implements Observer, FlightManagementService {
         }            
     }
     
-    public class ReachedDestinationCommand extends Command
+    public class ReachedDestinationCommand extends Action
     {      
         /* Variables */
         
@@ -193,7 +193,7 @@ public class Manager implements Observer, FlightManagementService {
         }            
     }
     
-    public class LocationUpdateCommand extends Command
+    public class LocationUpdateCommand extends Action
     {      
         /* Variables */        
         
@@ -214,7 +214,7 @@ public class Manager implements Observer, FlightManagementService {
         }            
     }
     
-    public class EmergencyCommand extends Command
+    public class EmergencyCommand extends Action
     {      
         /* Variables */        
         

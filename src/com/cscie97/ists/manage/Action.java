@@ -13,7 +13,7 @@ import com.cscie97.ists.resource.Spaceship;
  * Command class that represents the command event(s) classification gleaned from a specific type of update event.
  * It also represents the command in the Command design pattern
  */
-public abstract class Command
+public abstract class Action
 {
     /* Variables */
     
@@ -21,7 +21,7 @@ public abstract class Command
     
     /* Constructor */
     
-    public Command(Spaceship sourceDevice)
+    public Action(Spaceship sourceDevice)
     {
         this.sourceDevice = sourceDevice;               
     }
