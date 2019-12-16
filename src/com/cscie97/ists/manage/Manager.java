@@ -92,6 +92,7 @@ public class Manager implements Observer, FlightManagementService {
         
         eventString = eventString.trim();
         
+        
         if (eventString.equals("status update"))
         {        
             // Create new Emergency               
@@ -103,6 +104,10 @@ public class Manager implements Observer, FlightManagementService {
         
         if (eventString.equals("emergency"))
         {        
+            // TODO
+            
+            // Check if event event is valid/recognizable?
+            
             // Create new Emergency               
             Action emergency = new EmergencyCommand(event.getSourceDevice());            
             
@@ -118,6 +123,54 @@ public class Manager implements Observer, FlightManagementService {
     }
     
     /* Nested classes */
+    
+    public class EmergencyCommand extends Action
+    {      
+        /* Variables */        
+        
+        String emergencyType;
+        
+        public EmergencyCommand(Spaceship sourceDevice)
+        {
+            super(sourceDevice);            
+        }
+
+        public void execute()
+        {
+            /* *
+             * Scratch:
+             * Actors -- Flight Management service, Communication system, Spacecraft/crew, Auth service, passengers (maybe in case of emergency contact
+             * that's in Customer service)
+             */
+            
+            // Get spaceship's location
+            String coordinates = sourceDevice.coordinates;   
+            
+            /* *
+             * Check for available spaceships for flight
+             *  - Need to be sure enough capacity to fit/rescue passengers?
+             *  - Can check ships that are near coordinates for faster rescue
+             */
+            customerImpl.getFlights(new AuthTokenTuple(myAuthToken)); // See which of the ships can be scheduled
+            resourceImpl.getSpaceships(new AuthTokenTuple(myAuthToken)); // See what ships ISTS possesses            
+            
+            // Check for crew that can be scheduled
+            
+            // Check which launchpad can be used for flight
+            
+            // Check which crew can be scheduled for flight
+            resourceImpl.getEntitiesVisitor(new AuthTokenTuple(myAuthToken));
+            
+            // Define the rescue flight to leave for asap
+            Flight flight = defineFlight(null, null, null, null, null, null, null, null, null, null, null, null, new AuthTokenTuple(myAuthToken));
+            
+            // Book crew for the flight (in Customer service)
+            
+            // Message distressed spaceship that message was received and when to expect the rescue plane (to Communication System)
+            
+            // Fill spaceship up with fuel?            
+        }            
+    }
     
     public class TestCommand extends Action
     {      
@@ -212,29 +265,5 @@ public class Manager implements Observer, FlightManagementService {
             sourceDevice.setTrajectory(trajectory, new AuthTokenTuple(myAuthToken));
             sourceDevice.setCoordinates(coordinates, new AuthTokenTuple(myAuthToken));
         }            
-    }
-    
-    public class EmergencyCommand extends Action
-    {      
-        /* Variables */        
-        
-        String emergencyType;
-        
-        public EmergencyCommand(Spaceship sourceDevice)
-        {
-            super(sourceDevice);            
-        }
-
-        public void execute()
-        {
-            // Get spaceship's location
-            String coordinates = sourceDevice.coordinates;
-            
-            // Define rescue flight to send
-            resourceImpl.defineSpaceship(null, null, null, null, null, null, null, null, null, null);
-            Flight flight = defineFlight(null, null, null, null, null, null, null, null, null, null, null, null, null);
-        }            
-    }
-    
-    
+    }    
 }

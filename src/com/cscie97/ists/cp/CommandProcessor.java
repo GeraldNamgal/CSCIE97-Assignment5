@@ -84,8 +84,7 @@ public class CommandProcessor
         /* TODO: Booking a new flight (sequence diagram) */
         
         // On Select Flight event
-        customerImpl.bookFlight("id", "flightNum", "destination", "passengerId", 360, "one-way", "departTime", "returnTime", new AuthTokenTuple(null));
-        
+        customerImpl.bookFlight("id", "flightNum", "destination", "passengerId", 360, "one-way", "departTime", "returnTime", new AuthTokenTuple(null));        
         
         /* TODO: Still need? -- // Get flights
         LinkedHashMap<String, Flight> flights = customerImpl.getFlights(new AuthTokenTuple(hardcodedUserAuthToken));
@@ -98,7 +97,13 @@ public class CommandProcessor
             System.out.println(flight.id);
             System.out.println(flight.number);
             // ...
-        }*/        
+        }*/
+        
+        /* TODO: Emergency event (activity diagram) */
+        
+        resourceImpl.createEvent(spaceshipId, "emergency", new AuthTokenTuple(hardcodedUserAuthToken));
+        
+        
     } 
     
     public void parseAndProcess(String input)
